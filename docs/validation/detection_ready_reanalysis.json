@@ -1,0 +1,60 @@
+{
+  "date": "2026-09-24",
+  "method": "For EACH emitted row: source_to_detection_ready_estimate = source_to_result_estimate - tracking - los - completion_queue; then sort and use index floor((n-1)*q). Not subtraction of percentiles.",
+  "limitations": [
+    "Only frames surviving through tracker/publisher exist in stored JSON.",
+    "No pure detection-only run or early detection publisher existed in these records.",
+    "Video PTS clock estimate, not sensor exposure or consumer receipt.",
+    "First 10 output rows omitted; original 900 received frames per run."
+  ],
+  "runs": [
+    {
+      "name": "fp16_baseline",
+      "source_jsonl": "build/fp16_baseline_final/one_auto.jsonl",
+      "source_sha256": "d959311afc39250a0dc99ca0f85f1964f0f9472630e7587238da7d842914004e",
+      "samples": 259,
+      "source_to_detection_ready_estimate_ms": {
+        "p50": 64.98086300000001,
+        "p95": 72.917014,
+        "p99": 73.957072
+      },
+      "receiver_to_detection_ready_ms": {
+        "p50": 64.864975,
+        "p95": 72.76805999999999,
+        "p99": 73.741911
+      }
+    },
+    {
+      "name": "fp16_fast",
+      "source_jsonl": "build/fp16_fast_final/one_all_cores.jsonl",
+      "source_sha256": "dafbd6a74d1d30f9924e8a23a658766c5034b4a675e6a568ff43885783631d52",
+      "samples": 303,
+      "source_to_detection_ready_estimate_ms": {
+        "p50": 56.49274899999999,
+        "p95": 64.257857,
+        "p99": 64.80185999999999
+      },
+      "receiver_to_detection_ready_ms": {
+        "p50": 56.360783999999995,
+        "p95": 64.152457,
+        "p99": 64.661692
+      }
+    },
+    {
+      "name": "int8",
+      "source_jsonl": "build/int8_final/one_all_cores.jsonl",
+      "source_sha256": "fe076b477a6fffe9b3d4ded2a357050d8b3551f744c1b9e39b9e7f99337d6570",
+      "samples": 487,
+      "source_to_detection_ready_estimate_ms": {
+        "p50": 39.398077,
+        "p95": 46.352166000000004,
+        "p99": 47.448697
+      },
+      "receiver_to_detection_ready_ms": {
+        "p50": 39.23456399999999,
+        "p95": 46.00484800000001,
+        "p99": 47.144360000000006
+      }
+    }
+  ]
+}

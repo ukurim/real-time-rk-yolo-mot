@@ -1,0 +1,39 @@
+%YAML:1.0
+---
+# Faster quantized candidate; see docs/OPTIMIZATION_RESULTS.md for agreement limits.
+# Calibration uses official COCO20, not this evaluation video.
+source:
+  type: file
+  path: ../1080p60hz.mov
+  decoder: auto
+  copy_to_cpu: 0
+  realtime: 1
+  timeout_ms: 5000
+  fps: 60
+detector:
+  model_path: ../model/RK3588/yolov8n_int8.rknn
+  confidence_threshold: 0.1
+  nms_threshold: 0.7
+  max_detections: 300
+  core_mask: 7
+  preprocess: cpu
+  input_mode: uint8
+tracker:
+  high_thresh: 0.5
+  low_thresh: 0.1
+  new_track_thresh: 0.6
+  match_thresh: 0.8
+  track_buffer_seconds: 1.0
+  prediction_output_seconds: 0.2
+  nominal_fps: 60.0
+  gmc_method: sparseOptFlow
+pipeline:
+  workers: 1
+  opencv_threads: 4
+  max_frames: 0
+  max_age_ms: 250.0
+output:
+  jsonl: ../results_int8.jsonl
+  preview: 0
+  video_pipeline: ""
+calibration: ""

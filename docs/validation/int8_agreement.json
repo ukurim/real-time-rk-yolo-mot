@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "evaluation": "reference_model_agreement_not_ground_truth",
+  "warning": "FP16 agreement is not detection accuracy, precision/recall against labels, or mAP. Both models can make the same error. Calibration/evaluation overlap must be audited separately.",
+  "input_jsonl": {
+    "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/quality/int8_comparison.jsonl",
+    "sha256": "ef13099bf82028ce29accc851fc3b507a6342e928dde39c8d43af028fd9431f3"
+  },
+  "run": {
+    "record_type": "run",
+    "schema_version": 1,
+    "comparison": "reference_model_agreement_not_ground_truth",
+    "baseline_model": {
+      "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/model/RK3588/yolov8n.rknn",
+      "bytes": 7607177,
+      "sha256": "0d17bff40beb4ef0705d91dc11fceae70bb1c23d7e20af742a4e117479bf190c"
+    },
+    "candidate_model": {
+      "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/model/RK3588/yolov8n_int8.rknn",
+      "bytes": 4327819,
+      "sha256": "6d31f73602f2295ef29ea4d0a7984e458dc19a3b94dbb2a886c1a0e583039661"
+    },
+    "source": {
+      "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/1080p60hz.mov",
+      "bytes": 80294885,
+      "sha256": "9e60c1ee13e3804cf16ca8ab88eecc8f89b52367889b8b9556f09ea2e18113d3"
+    },
+    "sampling": {
+      "start_frame": 0,
+      "stride": 45,
+      "requested_samples": 120,
+      "realtime": false,
+      "decoder": "mpp",
+      "copy_input": true
+    },
+    "detector": {
+      "confidence_threshold": 0.100000001,
+      "nms_threshold": 0.699999988,
+      "max_detections": 300,
+      "core_mask": 0,
+      "preprocess": "cpu_letterbox_rgb",
+      "input_width": 640,
+      "input_height": 640,
+      "class_count": 80
+    },
+    "inference_order": "baseline_then_candidate",
+    "timing_is_benchmark": false
+  },
+  "collection_summary": {
+    "record_type": "summary",
+    "decoded_frames": 5356,
+    "selected_frames": 120,
+    "requested_samples": 120,
+    "eof": false,
+    "interrupted": false
+  },
+  "matching": {
+    "method": "same_class_maximum_cardinality_then_maximum_sum_iou",
+    "iou_threshold": 0.5,
+    "score_filter": "score >= threshold, both models",
+    "boxes": "post_NMS_xyxy_original_distorted_image_pixels",
+    "index_domain": "zero_based_detection_index_in_original_frame_record",
+    "calibration_overlap": "not_checked_by_tool"
+  },
+  "sample_count": 120,
+  "threshold_results": [
+    {
+      "confidence_threshold": 0.1,
+      "baseline_count": 2286,
+      "candidate_count": 2208,
+      "matched_pairs": 2133,
+      "unmatched_baseline": 153,
+      "unmatched_candidate": 75,
+      "matched_fraction_of_baseline": 0.9330708661417323,
+      "matched_fraction_of_candidate": 0.9660326086956522,
+      "matched_iou": {
+        "count": 2133,
+        "mean": 0.9522203993548728,
+        "min": 0.5071451480857434,
+        "p05": 0.8747274760666243,
+        "p50": 0.9653203535369317,
+        "p95": 0.9900355460717715,
+        "p99": 0.9940183235238792,
+        "max": 0.9965329999321565
+      },
+      "matched_score_delta_candidate_minus_baseline": {
+        "count": 2133,
+        "mean": -0.02354774257899672,
+        "min": -0.27038317900000003,
+        "p05": -0.07458600340000002,
+        "p50": -0.022147000000000028,
+        "p95": 0.02483203419999994,
+        "p99": 0.05855576843999987,
+        "max": 0.303624331
+      },
+      "matched_absolute_score_delta": {
+        "count": 2133,
+        "mean": 0.031113427574777305,
+        "min": 6.303000000013048e-06,
+        "p05": 0.002569847999999997,
+        "p50": 0.025281012000000047,
+        "p95": 0.0762466486,
+        "p99": 0.1158881892399999,
+        "max": 0.303624331
+      },
+      "matched_center_distance_pixels": {
+        "count": 2133,
+        "mean": 0.9599026548112155,
+        "min": 0.013412209670666576,
+        "p05": 0.14765349890517854,
+        "p50": 0.618580610548004,
+        "p95": 2.498189603294127,
+        "p99": 6.194478849554562,
+        "max": 76.46838138592051
+      },
+      "per_class": {
+        "0": {
+          "baseline_count": 8,
+          "candidate_count": 6,
+          "matched_pairs": 6,
+          "unmatched_baseline": 2,
+          "unmatched_candidate": 0,
+          "matched_fraction_of_baseline": 0.75,
+          "matched_fraction_of_candidate": 1.0
+        },
+        "2": {
+          "baseline_count": 1984,
+          "candidate_count": 1915,
+          "matched_pairs": 1866,
+          "unmatched_baseline": 118,
+          "unmatched_candidate": 49,
+          "matched_fraction_of_baseline": 0.9405241935483871,
+          "matched_fraction_of_candidate": 0.9744125326370757
+        },
+        "3": {
+          "baseline_count": 1,
+          "candidate_count": 0,
+          "matched_pairs": 0,
+          "unmatched_baseline": 1,
+          "unmatched_candidate": 0,
+          "matched_fraction_of_baseline": 0.0,
+          "matched_fraction_of_candidate": null
+        },
+        "5": {
+          "baseline_count": 155,
+          "candidate_count": 154,
+          "matched_pairs": 144,
+          "unmatched_baseline": 11,
+          "unmatched_candidate": 10,
+          "matched_fraction_of_baseline": 0.9290322580645162,
+          "matched_fraction_of_candidate": 0.935064935064935
+        },
+        "7": {
+          "baseline_count": 137,
+          "candidate_count": 132,
+          "matched_pairs": 116,
+          "unmatched_baseline": 21,
+          "unmatched_candidate": 16,
+          "matched_fraction_of_baseline": 0.8467153284671532,
+          "matched_fraction_of_candidate": 0.8787878787878788
+        },
+        "9": {
+          "baseline_count": 1,
+          "candidate_count": 1,
+          "matched_pairs": 1,
+          "unmatched_baseline": 0,
+          "unmatched_candidate": 0,
+          "matched_fraction_of_baseline": 1.0,
+          "matched_fraction_of_candidate": 1.0
+        }
+      }
+    },
+    {
+      "confidence_threshold": 0.25,
+      "baseline_count": 1548,
+      "candidate_count": 1516,
+      "matched_pairs": 1485,
+      "unmatched_baseline": 63,
+      "unmatched_candidate": 31,
+      "matched_fraction_of_baseline": 0.9593023255813954,
+      "matched_fraction_of_candidate": 0.9795514511873351,
+      "matched_iou": {
+        "count": 1485,
+        "mean": 0.9650843383601196,
+        "min": 0.6363294702262041,
+        "p05": 0.9163497921085183,
+        "p50": 0.9717563842996519,
+        "p95": 0.9908846327600953,
+        "p99": 0.9944331739505158,
+        "max": 0.9965329999321565
+      },
+      "matched_score_delta_candidate_minus_baseline": {
+        "count": 1485,
+        "mean": -0.02725139680808081,
+        "min": -0.27038317900000003,
+        "p05": -0.07835209939999996,
+        "p50": -0.02538913499999995,
+        "p95": 0.022761767799999933,
+        "p99": 0.05124412228000006,
+        "max": 0.303624331
+      },
+      "matched_absolute_score_delta": {
+        "count": 1485,
+        "mean": 0.03335542053063973,
+        "min": 2.124900000000096e-05,
+        "p05": 0.0029308682000000366,
+        "p50": 0.027274251000000027,
+        "p95": 0.07923067199999997,
+        "p99": 0.11547128288000005,
+        "max": 0.303624331
+      },
+      "matched_center_distance_pixels": {
+        "count": 1485,
+        "mean": 0.7456648475929868,
+        "min": 0.013412209670666576,
+        "p05": 0.1369318624335716,
+        "p50": 0.5605582518583001,
+        "p95": 1.8727409827573167,
+        "p99": 3.991236170694967,
+        "max": 10.05908264079018
+      },
+      "per_class": {
+        "0": {
+          "baseline_count": 1,
+          "candidate_count": 1,
+          "matched_pairs": 1,
+          "unmatched_baseline": 0,
+          "unmatched_candidate": 0,
+          "matched_fraction_of_baseline": 1.0,
+          "matched_fraction_of_candidate": 1.0
+        },
+        "2": {
+          "baseline_count": 1378,
+          "candidate_count": 1339,
+          "matched_pairs": 1327,
+          "unmatched_baseline": 51,
+          "unmatched_candidate": 12,
+          "matched_fraction_of_baseline": 0.9629898403483309,
+          "matched_fraction_of_candidate": 0.9910380881254668
+        },
+        "5": {
+          "baseline_count": 103,
+          "candidate_count": 98,
+          "matched_pairs": 92,
+          "unmatched_baseline": 11,
+          "unmatched_candidate": 6,
+          "matched_fraction_of_baseline": 0.8932038834951457,
+          "matched_fraction_of_candidate": 0.9387755102040817
+        },
+        "7": {
+          "baseline_count": 66,
+          "candidate_count": 78,
+          "matched_pairs": 65,
+          "unmatched_baseline": 1,
+          "unmatched_candidate": 13,
+          "matched_fraction_of_baseline": 0.9848484848484849,
+          "matched_fraction_of_candidate": 0.8333333333333334
+        }
+      }
+    },
+    {
+      "confidence_threshold": 0.5,
+      "baseline_count": 970,
+      "candidate_count": 920,
+      "matched_pairs": 910,
+      "unmatched_baseline": 60,
+      "unmatched_candidate": 10,
+      "matched_fraction_of_baseline": 0.9381443298969072,
+      "matched_fraction_of_candidate": 0.9891304347826086,
+      "matched_iou": {
+        "count": 910,
+        "mean": 0.9723382179079292,
+        "min": 0.7350939861271855,
+        "p05": 0.9411565867013716,
+        "p50": 0.9768099204460353,
+        "p95": 0.9917217271001806,
+        "p99": 0.9944857529997955,
+        "max": 0.9965329999321565
+      },
+      "matched_score_delta_candidate_minus_baseline": {
+        "count": 910,
+        "mean": -0.028499660764835167,
+        "min": -0.17232018699999996,
+        "p05": -0.07073751059999998,
+        "p50": -0.026324689500000054,
+        "p95": 0.011560875199999992,
+        "p99": 0.0365216203999999,
+        "max": 0.06414961799999996
+      },
+      "matched_absolute_score_delta": {
+        "count": 910,
+        "mean": 0.03177286527912088,
+        "min": 0.00011020900000002776,
+        "p05": 0.0033624139999999803,
+        "p50": 0.027379066000000007,
+        "p95": 0.07073751059999997,
+        "p99": 0.10354207466999994,
+        "max": 0.17232018699999996
+      },
+      "matched_center_distance_pixels": {
+        "count": 910,
+        "mean": 0.685232334235757,
+        "min": 0.013598984787407392,
+        "p05": 0.13445108179851886,
+        "p50": 0.5364303628692835,
+        "p95": 1.6188479375634248,
+        "p99": 2.4721588933535834,
+        "max": 17.203924532918155
+      },
+      "per_class": {
+        "2": {
+          "baseline_count": 909,
+          "candidate_count": 862,
+          "matched_pairs": 857,
+          "unmatched_baseline": 52,
+          "unmatched_candidate": 5,
+          "matched_fraction_of_baseline": 0.9427942794279428,
+          "matched_fraction_of_candidate": 0.994199535962877
+        },
+        "5": {
+          "baseline_count": 42,
+          "candidate_count": 43,
+          "matched_pairs": 39,
+          "unmatched_baseline": 3,
+          "unmatched_candidate": 4,
+          "matched_fraction_of_baseline": 0.9285714285714286,
+          "matched_fraction_of_candidate": 0.9069767441860465
+        },
+        "7": {
+          "baseline_count": 19,
+          "candidate_count": 15,
+          "matched_pairs": 14,
+          "unmatched_baseline": 5,
+          "unmatched_candidate": 1,
+          "matched_fraction_of_baseline": 0.7368421052631579,
+          "matched_fraction_of_candidate": 0.9333333333333333
+        }
+      }
+    }
+  ]
+}

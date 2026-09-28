@@ -1,0 +1,20 @@
+{
+  "model": "Rockchip YOLOv8n COCO optimized split-head ONNX",
+  "model_zoo_commit": "bad6c7334531becaf90a561988519b7bec34d0ab",
+  "upstream_download_script": "https://github.com/airockchip/rknn_model_zoo/blob/bad6c7334531becaf90a561988519b7bec34d0ab/examples/yolov8/model/download_model.sh",
+  "upstream_conversion_recipe": "https://github.com/airockchip/rknn_model_zoo/blob/bad6c7334531becaf90a561988519b7bec34d0ab/examples/yolov8/python/convert.py",
+  "onnx_url": "https://ftrg.zbox.filez.com/v2/delivery/data/95f00b0fc900458ba134f8b180b3f7a1/examples/yolov8/yolov8n.onnx",
+  "onnx_sha256": "0c8716701f471067932b797eeb67c8e5db47c693c2557c881d7679ec12e21bc5",
+  "toolkit_version": "2.3.2",
+  "toolkit_binary_build_commit": "c7d6ffcf",
+  "toolkit_source_commit": "42aa1d426c0a9e0869b6374edba009f7208a1926",
+  "toolkit_wheel_url": "https://raw.githubusercontent.com/airockchip/rknn-toolkit2/42aa1d426c0a9e0869b6374edba009f7208a1926/rknn-toolkit2/packages/arm64/rknn_toolkit2-2.3.2-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+  "toolkit_wheel_sha256": "d78e2ecd77502988dc2dcd46d665102be8fb15f4d4d541ef272f6abaabca0eda",
+  "conversion": {
+    "target_platform": "rk3588",
+    "mean_values": [[0, 0, 0]],
+    "std_values": [[255, 255, 255]],
+    "do_quantization": false,
+    "quantization_dataset": null
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "model": "YOLOv8n COCO, Rockchip optimized split-head export",
+  "model_zoo_commit": "bad6c7334531becaf90a561988519b7bec34d0ab",
+  "model_zoo_source": "https://github.com/airockchip/rknn_model_zoo/tree/bad6c7334531becaf90a561988519b7bec34d0ab/examples/yolov8",
+  "model_upstream": "https://github.com/airockchip/ultralytics_yolov8",
+  "onnx_url": "https://ftrg.zbox.filez.com/v2/delivery/data/95f00b0fc900458ba134f8b180b3f7a1/examples/yolov8/yolov8n.onnx",
+  "onnx_sha256": "0c8716701f471067932b797eeb67c8e5db47c693c2557c881d7679ec12e21bc5",
+  "onnx_inputs": [
+    {
+      "name": "images",
+      "shape": [
+        1,
+        3,
+        640,
+        640
+      ],
+      "dtype": "FLOAT"
+    }
+  ],
+  "onnx_outputs": [
+    {
+      "name": "318",
+      "shape": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "onnx::ReduceSum_326",
+      "shape": [
+        1,
+        80,
+        80,
+        80
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "331",
+      "shape": [
+        1,
+        1,
+        80,
+        80
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "338",
+      "shape": [
+        1,
+        64,
+        40,
+        40
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "onnx::ReduceSum_346",
+      "shape": [
+        1,
+        80,
+        40,
+        40
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "350",
+      "shape": [
+        1,
+        1,
+        40,
+        40
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "357",
+      "shape": [
+        1,
+        64,
+        20,
+        20
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "onnx::ReduceSum_365",
+      "shape": [
+        1,
+        80,
+        20,
+        20
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "369",
+      "shape": [
+        1,
+        1,
+        20,
+        20
+      ],
+      "dtype": "FLOAT"
+    }
+  ],
+  "onnx_opsets": [
+    {
+      "domain": "",
+      "version": 12
+    }
+  ],
+  "toolkit_version": "2.3.2",
+  "toolkit_source_commit": "42aa1d426c0a9e0869b6374edba009f7208a1926",
+  "target_platform": "rk3588",
+  "do_quantization": false,
+  "quantization_dataset": null,
+  "mean_values": [
+    [
+      0,
+      0,
+      0
+    ]
+  ],
+  "std_values": [
+    [
+      255,
+      255,
+      255
+    ]
+  ],
+  "input_pixels": "RGB uint8 0..255; normalizing by 255 is embedded in RKNN",
+  "decoder_layout": "split9: (DFL box logits, sigmoid class scores, class-score sum) at strides 8,16,32",
+  "class_count": 80,
+  "bbox_distribution_bins": 16,
+  "rknn_file": "yolov8n.rknn",
+  "rknn_size_bytes": 7607177,
+  "rknn_sha256": "0d17bff40beb4ef0705d91dc11fceae70bb1c23d7e20af742a4e117479bf190c",
+  "conversion_host": {
+    "machine": "aarch64",
+    "python": "3.8.10",
+    "platform": "Linux-5.10.198-aarch64-with-glibc2.29"
+  },
+  "created_utc": "2026-09-24T11:01:56.976922+00:00"
+}

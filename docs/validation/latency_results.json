@@ -1,0 +1,1038 @@
+{
+  "benchmarks_cpu4": [
+    {
+      "name": "one_auto",
+      "workers": 1,
+      "core_mask": 0,
+      "output_frames": 91,
+      "measured_frames": 81,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 111.724973,
+        "p95": 122.135716,
+        "p99": 125.548114
+      },
+      "source_to_result_estimate": {
+        "p50": 112.051929,
+        "p95": 122.903407,
+        "p99": 127.572757
+      },
+      "queue": {
+        "p50": 6.287862,
+        "p95": 16.384781,
+        "p99": 16.573776
+      },
+      "preprocess": {
+        "p50": 3.753351,
+        "p95": 3.90268,
+        "p99": 4.025177
+      },
+      "inference": {
+        "p50": 45.703151,
+        "p95": 51.172035,
+        "p99": 51.98547
+      },
+      "postprocess": {
+        "p50": 4.251795,
+        "p95": 6.698225,
+        "p99": 6.899178
+      },
+      "tracking": {
+        "p50": 48.05275,
+        "p95": 53.333225,
+        "p99": 57.382316
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000292
+      },
+      "publisher_wait": {
+        "p50": 0.135038,
+        "p95": 0.190452,
+        "p99": 5.49251
+      },
+      "validation": {
+        "frames": 91,
+        "targets": 813,
+        "predicted_targets": 56
+      },
+      "application_summary": "Summary: received=300 results=91 targets=813 capture_mailbox_dropped=209 completion_dropped=0 expired=0 json_dropped=0 workers=1 elapsed_s=5.2738"
+    },
+    {
+      "name": "one_all_cores",
+      "workers": 1,
+      "core_mask": 7,
+      "output_frames": 93,
+      "measured_frames": 83,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 110.192605,
+        "p95": 121.212915,
+        "p99": 125.147091
+      },
+      "source_to_result_estimate": {
+        "p50": 110.314381,
+        "p95": 121.601367,
+        "p99": 125.307299
+      },
+      "queue": {
+        "p50": 6.277071,
+        "p95": 16.05375,
+        "p99": 16.603234
+      },
+      "preprocess": {
+        "p50": 3.748102,
+        "p95": 3.934471,
+        "p99": 3.963345
+      },
+      "inference": {
+        "p50": 44.596601,
+        "p95": 50.011531,
+        "p99": 50.638887
+      },
+      "postprocess": {
+        "p50": 4.239254,
+        "p95": 4.503205,
+        "p99": 5.8425
+      },
+      "tracking": {
+        "p50": 47.283359,
+        "p95": 54.226868,
+        "p99": 57.627604
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000292
+      },
+      "publisher_wait": {
+        "p50": 0.147579,
+        "p95": 0.191328,
+        "p99": 2.042775
+      },
+      "validation": {
+        "frames": 93,
+        "targets": 860,
+        "predicted_targets": 50
+      },
+      "application_summary": "Summary: received=300 results=93 targets=860 capture_mailbox_dropped=207 completion_dropped=0 expired=0 json_dropped=0 workers=1 elapsed_s=5.23059"
+    },
+    {
+      "name": "two_instances",
+      "workers": 2,
+      "core_mask": 0,
+      "output_frames": 104,
+      "measured_frames": 94,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 130.233623,
+        "p95": 151.966542,
+        "p99": 162.967902
+      },
+      "source_to_result_estimate": {
+        "p50": 130.563248,
+        "p95": 152.107318,
+        "p99": 163.067809
+      },
+      "queue": {
+        "p50": 4.216505,
+        "p95": 15.617722,
+        "p99": 16.610818
+      },
+      "preprocess": {
+        "p50": 4.02401,
+        "p95": 4.475789,
+        "p99": 4.719324
+      },
+      "inference": {
+        "p50": 50.082989,
+        "p95": 55.532043,
+        "p99": 59.245438
+      },
+      "postprocess": {
+        "p50": 4.896653,
+        "p95": 8.473551,
+        "p99": 10.285041
+      },
+      "tracking": {
+        "p50": 48.319624,
+        "p95": 52.052851,
+        "p99": 55.431421
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000583,
+        "p99": 0.001166
+      },
+      "publisher_wait": {
+        "p50": 0.150204,
+        "p95": 0.238868,
+        "p99": 6.639602
+      },
+      "validation": {
+        "frames": 104,
+        "targets": 970,
+        "predicted_targets": 62
+      },
+      "application_summary": "Summary: received=300 results=104 targets=970 capture_mailbox_dropped=138 completion_dropped=58 expired=0 json_dropped=0 workers=2 elapsed_s=5.26719"
+    },
+    {
+      "name": "three_instances",
+      "workers": 3,
+      "core_mask": 0,
+      "output_frames": 99,
+      "measured_frames": 89,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 137.472301,
+        "p95": 155.089338,
+        "p99": 161.924939
+      },
+      "source_to_result_estimate": {
+        "p50": 189.811801,
+        "p95": 215.271477,
+        "p99": 222.604631
+      },
+      "queue": {
+        "p50": 4.954109,
+        "p95": 11.971993,
+        "p99": 16.462366
+      },
+      "preprocess": {
+        "p50": 4.478998,
+        "p95": 5.405305,
+        "p99": 12.633182
+      },
+      "inference": {
+        "p50": 53.43823,
+        "p95": 61.189926,
+        "p99": 66.427237
+      },
+      "postprocess": {
+        "p50": 5.80546,
+        "p95": 14.573877,
+        "p99": 20.726411
+      },
+      "tracking": {
+        "p50": 51.227168,
+        "p95": 55.481298,
+        "p99": 58.815244
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000583,
+        "p99": 0.001167
+      },
+      "publisher_wait": {
+        "p50": 0.13708,
+        "p95": 0.229827,
+        "p99": 5.578842
+      },
+      "validation": {
+        "frames": 99,
+        "targets": 916,
+        "predicted_targets": 53
+      },
+      "application_summary": "Summary: received=300 results=99 targets=916 capture_mailbox_dropped=85 completion_dropped=116 expired=0 json_dropped=0 workers=3 elapsed_s=5.293"
+    }
+  ],
+  "benchmarks_mpp_raw": [
+    {
+      "name": "one_auto",
+      "workers": 1,
+      "core_mask": 0,
+      "output_frames": 65,
+      "measured_frames": 55,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 149.584887,
+        "p95": 160.917858,
+        "p99": 165.631351
+      },
+      "source_to_result_estimate": {
+        "p50": 149.769616,
+        "p95": 161.05945,
+        "p99": 165.793739
+      },
+      "queue": {
+        "p50": 8.649421,
+        "p95": 15.816927,
+        "p99": 16.160793
+      },
+      "preprocess": {
+        "p50": 29.892945,
+        "p95": 30.977332,
+        "p99": 32.000468
+      },
+      "inference": {
+        "p50": 43.345398,
+        "p95": 44.127625,
+        "p99": 47.913643
+      },
+      "postprocess": {
+        "p50": 3.943513,
+        "p95": 4.41425,
+        "p99": 4.576995
+      },
+      "tracking": {
+        "p50": 62.694599,
+        "p95": 66.536032,
+        "p99": 68.864342
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000583
+      },
+      "publisher_wait": {
+        "p50": 0.143204,
+        "p95": 0.183745,
+        "p99": 0.215244
+      },
+      "validation": {
+        "frames": 65,
+        "targets": 587,
+        "predicted_targets": 35
+      },
+      "application_summary": "Summary: received=300 results=65 targets=587 capture_mailbox_dropped=235 completion_dropped=0 expired=0 json_dropped=0 workers=1 elapsed_s=5.19469"
+    },
+    {
+      "name": "one_all_cores",
+      "workers": 1,
+      "core_mask": 7,
+      "output_frames": 66,
+      "measured_frames": 56,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 147.561663,
+        "p95": 152.822888,
+        "p99": 155.814428
+      },
+      "source_to_result_estimate": {
+        "p50": 147.742862,
+        "p95": 152.909105,
+        "p99": 155.881214
+      },
+      "queue": {
+        "p50": 7.668867,
+        "p95": 15.519436,
+        "p99": 16.333746
+      },
+      "preprocess": {
+        "p50": 29.573581,
+        "p95": 30.488805,
+        "p99": 30.886335
+      },
+      "inference": {
+        "p50": 42.076977,
+        "p95": 43.150863,
+        "p99": 43.244778
+      },
+      "postprocess": {
+        "p50": 3.958971,
+        "p95": 4.154966,
+        "p99": 4.270754
+      },
+      "tracking": {
+        "p50": 62.556064,
+        "p95": 65.291529,
+        "p99": 67.83829
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000583
+      },
+      "publisher_wait": {
+        "p50": 0.10033,
+        "p95": 0.144371,
+        "p99": 0.154288
+      },
+      "validation": {
+        "frames": 66,
+        "targets": 582,
+        "predicted_targets": 29
+      },
+      "application_summary": "Summary: received=300 results=66 targets=582 capture_mailbox_dropped=234 completion_dropped=0 expired=0 json_dropped=0 workers=1 elapsed_s=5.15977"
+    },
+    {
+      "name": "two_instances",
+      "workers": 2,
+      "core_mask": 0,
+      "output_frames": 75,
+      "measured_frames": 65,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 179.213606,
+        "p95": 204.650603,
+        "p99": 211.347373
+      },
+      "source_to_result_estimate": {
+        "p50": 179.364425,
+        "p95": 204.745515,
+        "p99": 211.486364
+      },
+      "queue": {
+        "p50": 1.082053,
+        "p95": 14.330637,
+        "p99": 16.394412
+      },
+      "preprocess": {
+        "p50": 31.170412,
+        "p95": 36.436305,
+        "p99": 37.495899
+      },
+      "inference": {
+        "p50": 46.891093,
+        "p95": 48.814581,
+        "p99": 49.28911
+      },
+      "postprocess": {
+        "p50": 4.158175,
+        "p95": 4.718742,
+        "p99": 5.064941
+      },
+      "tracking": {
+        "p50": 67.945624,
+        "p95": 75.298625,
+        "p99": 76.172143
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000292
+      },
+      "publisher_wait": {
+        "p50": 0.133579,
+        "p95": 0.165078,
+        "p99": 0.192203
+      },
+      "validation": {
+        "frames": 75,
+        "targets": 651,
+        "predicted_targets": 35
+      },
+      "application_summary": "Summary: received=300 results=75 targets=651 capture_mailbox_dropped=181 completion_dropped=44 expired=0 json_dropped=0 workers=2 elapsed_s=5.20623"
+    },
+    {
+      "name": "three_instances",
+      "workers": 3,
+      "core_mask": 0,
+      "output_frames": 71,
+      "measured_frames": 61,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 193.299261,
+        "p95": 213.678604,
+        "p99": 219.195035
+      },
+      "source_to_result_estimate": {
+        "p50": 193.437394,
+        "p95": 213.810159,
+        "p99": 219.364947
+      },
+      "queue": {
+        "p50": 8.139604,
+        "p95": 15.294277,
+        "p99": 16.020508
+      },
+      "preprocess": {
+        "p50": 42.083107,
+        "p95": 47.978109,
+        "p99": 48.226308
+      },
+      "inference": {
+        "p50": 46.905387,
+        "p95": 49.789597,
+        "p99": 50.218919
+      },
+      "postprocess": {
+        "p50": 4.481332,
+        "p95": 5.549386,
+        "p99": 6.17091
+      },
+      "tracking": {
+        "p50": 71.657272,
+        "p95": 78.545955,
+        "p99": 81.087757
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000292
+      },
+      "publisher_wait": {
+        "p50": 0.138246,
+        "p95": 0.173536,
+        "p99": 0.177912
+      },
+      "validation": {
+        "frames": 71,
+        "targets": 630,
+        "predicted_targets": 33
+      },
+      "application_summary": "Summary: received=300 results=71 targets=630 capture_mailbox_dropped=139 completion_dropped=90 expired=0 json_dropped=0 workers=3 elapsed_s=5.20343"
+    }
+  ],
+  "benchmarks_mpp_copy": [
+    {
+      "name": "one_auto",
+      "workers": 1,
+      "core_mask": 0,
+      "output_frames": 88,
+      "measured_frames": 78,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 109.564431,
+        "p95": 117.665832,
+        "p99": 119.057624
+      },
+      "source_to_result_estimate": {
+        "p50": 109.710267,
+        "p95": 117.83516,
+        "p99": 119.225415
+      },
+      "queue": {
+        "p50": 8.020317,
+        "p95": 16.141256,
+        "p99": 16.697158
+      },
+      "preprocess": {
+        "p50": 9.050746,
+        "p95": 10.084093,
+        "p99": 10.555413
+      },
+      "inference": {
+        "p50": 43.09021,
+        "p95": 44.274927,
+        "p99": 44.662541
+      },
+      "postprocess": {
+        "p50": 3.955181,
+        "p95": 4.188799,
+        "p99": 4.314504
+      },
+      "tracking": {
+        "p50": 44.603626,
+        "p95": 47.01885,
+        "p99": 48.803216
+      },
+      "los": {
+        "p50": 0.000291,
+        "p95": 0.000292,
+        "p99": 0.000292
+      },
+      "publisher_wait": {
+        "p50": 0.143205,
+        "p95": 0.159537,
+        "p99": 0.205619
+      },
+      "validation": {
+        "frames": 88,
+        "targets": 793,
+        "predicted_targets": 47
+      },
+      "application_summary": "Summary: received=300 results=88 targets=793 capture_mailbox_dropped=212 completion_dropped=0 expired=0 json_dropped=0 workers=1 elapsed_s=5.10152"
+    },
+    {
+      "name": "one_all_cores",
+      "workers": 1,
+      "core_mask": 7,
+      "output_frames": 90,
+      "measured_frames": 80,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 109.536437,
+        "p95": 117.420262,
+        "p99": 120.44447
+      },
+      "source_to_result_estimate": {
+        "p50": 109.614192,
+        "p95": 117.561168,
+        "p99": 120.571987
+      },
+      "queue": {
+        "p50": 9.761519,
+        "p95": 16.108592,
+        "p99": 16.587204
+      },
+      "preprocess": {
+        "p50": 9.202119,
+        "p95": 10.296421,
+        "p99": 10.61812
+      },
+      "inference": {
+        "p50": 42.039367,
+        "p95": 43.045296,
+        "p99": 43.374289
+      },
+      "postprocess": {
+        "p50": 3.929223,
+        "p95": 4.219133,
+        "p99": 4.359128
+      },
+      "tracking": {
+        "p50": 44.638336,
+        "p95": 47.496589,
+        "p99": 49.134252
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000292
+      },
+      "publisher_wait": {
+        "p50": 0.144371,
+        "p95": 0.177037,
+        "p99": 0.184328
+      },
+      "validation": {
+        "frames": 90,
+        "targets": 828,
+        "predicted_targets": 52
+      },
+      "application_summary": "Summary: received=300 results=90 targets=828 capture_mailbox_dropped=210 completion_dropped=0 expired=0 json_dropped=0 workers=1 elapsed_s=5.11957"
+    },
+    {
+      "name": "two_instances",
+      "workers": 2,
+      "core_mask": 0,
+      "output_frames": 109,
+      "measured_frames": 99,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 128.86174,
+        "p95": 153.368928,
+        "p99": 160.119659
+      },
+      "source_to_result_estimate": {
+        "p50": 129.310842,
+        "p95": 153.573749,
+        "p99": 160.292684
+      },
+      "queue": {
+        "p50": 4.839199,
+        "p95": 12.520026,
+        "p99": 14.881585
+      },
+      "preprocess": {
+        "p50": 9.301574,
+        "p95": 11.098482,
+        "p99": 12.006707
+      },
+      "inference": {
+        "p50": 47.386636,
+        "p95": 49.201627,
+        "p99": 50.677419
+      },
+      "postprocess": {
+        "p50": 4.457417,
+        "p95": 5.231479,
+        "p99": 6.058622
+      },
+      "tracking": {
+        "p50": 46.631824,
+        "p95": 50.700753,
+        "p99": 52.387997
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000583
+      },
+      "publisher_wait": {
+        "p50": 0.121038,
+        "p95": 0.181412,
+        "p99": 0.248493
+      },
+      "validation": {
+        "frames": 109,
+        "targets": 988,
+        "predicted_targets": 61
+      },
+      "application_summary": "Summary: received=300 results=109 targets=988 capture_mailbox_dropped=141 completion_dropped=50 expired=0 json_dropped=0 workers=2 elapsed_s=5.15555"
+    },
+    {
+      "name": "three_instances",
+      "workers": 3,
+      "core_mask": 0,
+      "output_frames": 101,
+      "measured_frames": 91,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 133.070085,
+        "p95": 154.726319,
+        "p99": 160.99056
+      },
+      "source_to_result_estimate": {
+        "p50": 133.194341,
+        "p95": 154.862617,
+        "p99": 161.284973
+      },
+      "queue": {
+        "p50": 4.470834,
+        "p95": 13.40871,
+        "p99": 16.426501
+      },
+      "preprocess": {
+        "p50": 11.924751,
+        "p95": 16.33492,
+        "p99": 16.819949
+      },
+      "inference": {
+        "p50": 50.145437,
+        "p95": 52.439623,
+        "p99": 53.217478
+      },
+      "postprocess": {
+        "p50": 4.966653,
+        "p95": 6.20241,
+        "p99": 6.480653
+      },
+      "tracking": {
+        "p50": 49.775905,
+        "p95": 53.739837,
+        "p99": 55.486289
+      },
+      "los": {
+        "p50": 0.000291,
+        "p95": 0.000583,
+        "p99": 0.000584
+      },
+      "publisher_wait": {
+        "p50": 0.145829,
+        "p95": 0.212328,
+        "p99": 0.227202
+      },
+      "validation": {
+        "frames": 101,
+        "targets": 908,
+        "predicted_targets": 49
+      },
+      "application_summary": "Summary: received=300 results=101 targets=908 capture_mailbox_dropped=83 completion_dropped=116 expired=0 json_dropped=0 workers=3 elapsed_s=5.13222"
+    }
+  ],
+  "benchmarks_cpu4_long": [
+    {
+      "name": "one_auto",
+      "workers": 1,
+      "core_mask": 0,
+      "command": [
+        "build/Aerial_detection_demo",
+        "--config",
+        "config/video.yaml",
+        "--workers",
+        "1",
+        "--core-mask",
+        "0",
+        "--realtime",
+        "--max-frames",
+        "900",
+        "--output",
+        "build/benchmarks_cpu4_long/one_auto.jsonl",
+        "--no-los"
+      ],
+      "output_frames": 271,
+      "measured_frames": 261,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 110.451934,
+        "p95": 122.943115,
+        "p99": 126.585648
+      },
+      "source_to_result_estimate": {
+        "p50": 110.827473,
+        "p95": 123.18244,
+        "p99": 128.137881
+      },
+      "queue": {
+        "p50": 6.385587,
+        "p95": 16.229961,
+        "p99": 16.530954
+      },
+      "preprocess": {
+        "p50": 3.750446,
+        "p95": 3.895984,
+        "p99": 4.026356
+      },
+      "inference": {
+        "p50": 45.775625,
+        "p95": 51.547853,
+        "p99": 54.897851
+      },
+      "postprocess": {
+        "p50": 4.235184,
+        "p95": 5.006914,
+        "p99": 11.479416
+      },
+      "tracking": {
+        "p50": 47.621827,
+        "p95": 54.007998,
+        "p99": 56.616306
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000292
+      },
+      "publisher_wait": {
+        "p50": 0.146122,
+        "p95": 0.211453,
+        "p99": 4.349515
+      },
+      "validation": {
+        "frames": 271,
+        "targets": 2534,
+        "predicted_targets": 126
+      },
+      "application_summary": "Summary: received=900 results=271 targets=2534 capture_mailbox_dropped=629 completion_dropped=0 expired=0 json_dropped=0 workers=1 elapsed_s=15.2523"
+    },
+    {
+      "name": "one_all_cores",
+      "workers": 1,
+      "core_mask": 7,
+      "command": [
+        "build/Aerial_detection_demo",
+        "--config",
+        "config/video.yaml",
+        "--workers",
+        "1",
+        "--core-mask",
+        "7",
+        "--realtime",
+        "--max-frames",
+        "900",
+        "--output",
+        "build/benchmarks_cpu4_long/one_all_cores.jsonl",
+        "--no-los"
+      ],
+      "output_frames": 278,
+      "measured_frames": 268,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 110.146571,
+        "p95": 121.318869,
+        "p99": 130.739462
+      },
+      "source_to_result_estimate": {
+        "p50": 110.280553,
+        "p95": 121.44802,
+        "p99": 130.87349
+      },
+      "queue": {
+        "p50": 6.598499,
+        "p95": 16.378416,
+        "p99": 16.594244
+      },
+      "preprocess": {
+        "p50": 3.773779,
+        "p95": 3.921067,
+        "p99": 4.014981
+      },
+      "inference": {
+        "p50": 44.678112,
+        "p95": 50.093932,
+        "p99": 52.927987
+      },
+      "postprocess": {
+        "p50": 4.247726,
+        "p95": 4.648173,
+        "p99": 8.514116
+      },
+      "tracking": {
+        "p50": 47.751326,
+        "p95": 54.202829,
+        "p99": 57.76253
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000292
+      },
+      "publisher_wait": {
+        "p50": 0.148454,
+        "p95": 0.206203,
+        "p99": 5.224492
+      },
+      "validation": {
+        "frames": 278,
+        "targets": 2623,
+        "predicted_targets": 135
+      },
+      "application_summary": "Summary: received=900 results=278 targets=2623 capture_mailbox_dropped=622 completion_dropped=0 expired=0 json_dropped=0 workers=1 elapsed_s=15.2402"
+    }
+  ],
+  "benchmarks_mpp_copy_long": [
+    {
+      "name": "one_auto",
+      "workers": 1,
+      "core_mask": 0,
+      "command": [
+        "build/Aerial_detection_demo",
+        "--config",
+        "config/video.yaml",
+        "--workers",
+        "1",
+        "--core-mask",
+        "0",
+        "--realtime",
+        "--max-frames",
+        "900",
+        "--output",
+        "build/benchmarks_mpp_copy_long/one_auto.jsonl",
+        "--no-los",
+        "--decoder",
+        "mpp",
+        "--copy-input"
+      ],
+      "output_frames": 267,
+      "measured_frames": 257,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 108.768492,
+        "p95": 116.641542,
+        "p99": 117.884013
+      },
+      "source_to_result_estimate": {
+        "p50": 108.887901,
+        "p95": 116.782576,
+        "p99": 118.037572
+      },
+      "queue": {
+        "p50": 9.010814,
+        "p95": 16.311336,
+        "p99": 16.809782
+      },
+      "preprocess": {
+        "p50": 8.949565,
+        "p95": 10.221783,
+        "p99": 10.5429
+      },
+      "inference": {
+        "p50": 42.944787,
+        "p95": 43.834055,
+        "p99": 44.18813
+      },
+      "postprocess": {
+        "p50": 3.955192,
+        "p95": 4.31889,
+        "p99": 4.525094
+      },
+      "tracking": {
+        "p50": 43.885971,
+        "p95": 46.44849,
+        "p99": 48.439356
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000292
+      },
+      "publisher_wait": {
+        "p50": 0.138247,
+        "p95": 0.157205,
+        "p99": 0.173829
+      },
+      "validation": {
+        "frames": 267,
+        "targets": 2491,
+        "predicted_targets": 115
+      },
+      "application_summary": "Summary: received=900 results=267 targets=2491 capture_mailbox_dropped=633 completion_dropped=0 expired=0 json_dropped=0 workers=1 elapsed_s=15.1093"
+    },
+    {
+      "name": "one_all_cores",
+      "workers": 1,
+      "core_mask": 7,
+      "command": [
+        "build/Aerial_detection_demo",
+        "--config",
+        "config/video.yaml",
+        "--workers",
+        "1",
+        "--core-mask",
+        "7",
+        "--realtime",
+        "--max-frames",
+        "900",
+        "--output",
+        "build/benchmarks_mpp_copy_long/one_all_cores.jsonl",
+        "--no-los",
+        "--decoder",
+        "mpp",
+        "--copy-input"
+      ],
+      "output_frames": 270,
+      "measured_frames": 260,
+      "calibrated": false,
+      "sensor_capture_latency_measured": false,
+      "receiver_to_result": {
+        "p50": 109.182651,
+        "p95": 116.646795,
+        "p99": 117.917846
+      },
+      "source_to_result_estimate": {
+        "p50": 109.307483,
+        "p95": 116.839662,
+        "p99": 118.088699
+      },
+      "queue": {
+        "p50": 9.07702,
+        "p95": 16.098426,
+        "p99": 16.712077
+      },
+      "preprocess": {
+        "p50": 9.192226,
+        "p95": 10.230241,
+        "p99": 10.657522
+      },
+      "inference": {
+        "p50": 42.233723,
+        "p95": 43.338236,
+        "p99": 43.596645
+      },
+      "postprocess": {
+        "p50": 3.950233,
+        "p95": 4.306932,
+        "p99": 4.509052
+      },
+      "tracking": {
+        "p50": 44.196006,
+        "p95": 47.020725,
+        "p99": 47.931577
+      },
+      "los": {
+        "p50": 0,
+        "p95": 0.000292,
+        "p99": 0.000583
+      },
+      "publisher_wait": {
+        "p50": 0.145829,
+        "p95": 0.178204,
+        "p99": 0.194537
+      },
+      "validation": {
+        "frames": 270,
+        "targets": 2553,
+        "predicted_targets": 126
+      },
+      "application_summary": "Summary: received=900 results=270 targets=2553 capture_mailbox_dropped=630 completion_dropped=0 expired=0 json_dropped=0 workers=1 elapsed_s=15.1311"
+    }
+  ]
+}

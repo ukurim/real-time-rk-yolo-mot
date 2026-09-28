@@ -1,237 +1,222 @@
-// फाइल का नाम: src/main.cc 
+#include "aerial/app_config.hpp"
+#include "aerial/output.hpp"
+#include <algorithm>
+#include <atomic>
+#include <csignal>
+#include <deque>
+#include <exception>
+#include <iostream>
+#include <memory>
+#include <mutex>
+#include <stdexcept>
+#include <thread>
 
-#include <stdio.h> 
-#include <memory> 
-#include <sys/time.h> 
-#include <string> 
-#include <vector> 
-#include <iostream> 
-#include <queue> 
-#include <stdlib.h> // For getenv() 
-#include <ctype.h>  // For isdigit() 
+namespace {
+std::atomic<bool> stop_requested{false};
+static_assert(std::atomic<bool>::is_always_lock_free, "Signal flag must be lock-free");
+void stop_handler(int) { stop_requested.store(true); }
+void usage() {
+    std::cerr << "Usage: Aerial_detection_demo --config config/video.yaml [options]\n"
+              << "  --model PATH          YOLOv8 RKNN model\n"
+              << "  --input PATH          File input (use config for camera/custom GStreamer)\n"
+              << "  --decoder auto|mpp    Auto decode or MPP direct BGR (H264 MOV/MP4)\n"
+              << "  --copy-input | --no-copy-input  Copy selected decoder frames to CPU memory\n"
+              << "  --calibration PATH    Real calibrated camera YAML\n"
+              << "  --no-los              Explicit detection/tracking-only mode (los:null)\n"
+              << "  --workers 1|2|3       Concurrent detector instances; benchmark before choosing\n"
+              << "  --cv-threads N        OpenCV CPU parallelism (1..8); benchmark with workers\n"
+              << "  --core-mask 0|1|2|4|7 RKNN auto-select/core0/core1/core2/combine-all\n"
+              << "  --input-mode MODE     uint8 or fp16_normalized (verified /255 FP16 models)\n"
+              << "  --realtime | --offline  Latest-frame replay or preserve all file frames\n"
+              << "  --max-frames N        Stop after N received frames (0 = EOF)\n"
+              << "  --output PATH|-       JSONL file or stdout\n"
+              << "  --preview             Optional asynchronous window (off by default)\n";
+}
+unsigned unsigned_arg(const std::string& text) {
+    std::size_t end = 0;
+    if (text.empty() || text[0] == '-') throw std::runtime_error("Invalid nonnegative integer: " + text);
+    const auto n = std::stoul(text, &end);
+    if (end != text.size() || n > 1000000000) throw std::runtime_error("Invalid integer: " + text);
+    return unsigned(n);
+}
+double percentile(std::deque<double> data, double q) {
+    if (data.empty()) return 0;
+    std::sort(data.begin(), data.end());
+    return data[std::size_t(q * (data.size() - 1))];
+}
+void append(std::deque<double>& data, double value) {
+    if (data.size() == 4096) data.pop_front();
+    data.push_back(value);
+}
+}
 
-#include "opencv2/core/core.hpp" 
-#include "opencv2/videoio.hpp" 
-#include "opencv2/highgui.hpp" 
-#include "opencv2/imgproc.hpp" // For cvtColor 
-
-#include "Yolo11.hpp" 
-#include "rknnPool.hpp" 
-#include "Visualizer.hpp" 
-#include "postprocess.h" 
-
-// 定义输出模式 
-enum class OutputMode { 
-    WINDOW_DISPLAY, 
-    KMS_DISPLAY, 
-    RTP_STREAM 
-}; 
-
-/** * @brief 检查程序是否在图形化桌面环境中运行 
- * @return 如果检测到桌面环境 (X11 or Wayland) 则返回 true, 否则返回 false 
- */ 
-bool isDesktopEnvironmentAvailable() { 
-    const char* display = getenv("DISPLAY"); 
-    if (display != nullptr && display[0] != '\0') { 
-        return true; 
-    } 
-    const char* wayland_display = getenv("WAYLAND_DISPLAY"); 
-    if (wayland_display != nullptr && wayland_display[0] != '\0') { 
-        return true; 
-    } 
-    return false; 
-} 
-
-int main(int argc, char **argv) 
-{ 
-    // --- 参数解析 --- 
-    if (argc < 3) { 
-        printf("Usage: %s <rknn model> <video_path | camera_id> [options]\n", argv[0]); 
-        printf("Options:\n"); 
-        printf("  --stream rtp://<ip>:<port>    Enable RTP streaming mode.\n"); 
-        printf("Display mode is detected automatically.\n"); 
-        return -1; 
-    } 
-
-    char *model_name = argv[1]; 
-    char *video_name = argv[2]; 
-    OutputMode output_mode = OutputMode::WINDOW_DISPLAY; 
-    std::string rtp_url; 
-    bool is_streaming = false; 
-
-    for (int i = 3; i < argc; ++i) { 
-        if (std::string(argv[i]) == "--stream" && (i + 1) < argc) { 
-            is_streaming = true; 
-            rtp_url = argv[i + 1]; 
-            i++; 
-        } 
-    } 
-
-    if (is_streaming) { 
-        output_mode = OutputMode::RTP_STREAM; 
-    } else { 
-        if (isDesktopEnvironmentAvailable()) { 
-            output_mode = OutputMode::WINDOW_DISPLAY; 
-            printf("Desktop environment detected. Using windowed display.\n"); 
-        } else { 
-            output_mode = OutputMode::KMS_DISPLAY; 
-            printf("No desktop environment detected. Using fullscreen hardware display (kmssink).\n"); 
-        } 
-    } 
-
-    // --- 初始化模型线程池 --- 
-    int threadNum = 3; 
-    rknnPool<Yolo11, cv::Mat, object_detect_result_list> infer_pool(model_name, threadNum); 
-    if (infer_pool.init() != 0) 
-    { 
-        printf("rknnPool init fail!\n"); 
-        return -1; 
-    } 
-
-    init_post_process(); 
-
-    // --- 初始化视频捕捉 --- 
-    cv::VideoCapture capture; 
-    std::string video_source = video_name; 
-
-    if (video_source.length() == 1 && isdigit(video_source[0])) { 
-        std::string gst_pipeline = "v4l2src device=/dev/video" + video_source + " ! queue ! image/jpeg,width=1920,height=1080 ! mppjpegdec ! videoconvert ! video/x-raw,format=BGR ! appsink"; 
-        printf("Using GStreamer pipeline for camera: %s\n", gst_pipeline.c_str()); 
-        capture.open(gst_pipeline, cv::CAP_GSTREAMER); 
-    } else { 
-        std::string gst_pipeline = "filesrc location=" + video_source + " ! qtdemux ! h264parse ! mppvideodec ! videoconvert ! video/x-raw,format=BGR ! appsink"; 
-        printf("Using GStreamer pipeline for video file: %s\n", gst_pipeline.c_str()); 
-        capture.open(gst_pipeline, cv::CAP_GSTREAMER); 
-    } 
-
-    if (!capture.isOpened()) { 
-        fprintf(stderr, "Error: Could not open video source: %s\n", video_name); 
-        return -1; 
-    } 
-
-    const int frame_width = capture.get(cv::CAP_PROP_FRAME_WIDTH); 
-    const int frame_height = capture.get(cv::CAP_PROP_FRAME_HEIGHT); 
-    const double fps_ref = capture.get(cv::CAP_PROP_FPS) > 0 ? capture.get(cv::CAP_PROP_FPS) : 30.0; 
-
-    if (frame_width == 0 || frame_height == 0) { 
-        fprintf(stderr, "Error: Frame width or height is 0.\n"); 
-        return -1; 
-    } 
-    // printf("Successfully opened source with resolution: %dx%d @ %f FPS\n", frame_width, frame_height, fps_ref); 
-
-    // --- 初始化视频输出 --- 
-    cv::VideoWriter video_writer; 
-    std::string gst_output_pipeline; 
-
-    switch (output_mode) { 
-        case OutputMode::WINDOW_DISPLAY: 
-            gst_output_pipeline = "appsrc ! videoconvert ! queue ! xvimagesink sync=false"; 
-            break; 
-        case OutputMode::KMS_DISPLAY: 
-            gst_output_pipeline = "appsrc ! videoconvert ! kmssink"; 
-            printf("Hint: KMS mode may require running with sudo.\n"); 
-            break; 
-        case OutputMode::RTP_STREAM: 
-
-            /* std::string host = rtp_url.substr(rtp_url.find("://") + 3, rtp_url.find(":", rtp_url.find("://") + 3) - (rtp_url.find("://") + 3)); 
-            std::string port = rtp_url.substr(rtp_url.find(":", rtp_url.find("://") + 3) + 1); 
-            long long bps_value = 6000000; 
-            gst_output_pipeline = "appsrc ! videoconvert ! mpph264enc bps=" + std::to_string(bps_value) + " ! h264parse ! rtph264pay config-interval=1 ! udpsink host=" + host + " port=" + port; 
-            */ 
-            long long bps_value = 6000000; 
-            std::string stream_url = rtp_url; 
-            // rtp_url 变量将直接包含完整的推流地址，例如 "rtsp://192.168.x.x:8554/yolocam" 
-            // 我们使用 rtspclientsink 将流推送到这个地址 
-            gst_output_pipeline = "appsrc ! videoconvert ! mpph264enc bps=" + std::to_string(bps_value) + " ! h264parse ! rtspclientsink location=" + stream_url; 
-            break; 
-    } 
-
-    printf("GStreamer Output Pipeline: %s\n", gst_output_pipeline.c_str()); 
-    video_writer.open(gst_output_pipeline, cv::CAP_GSTREAMER, 0, fps_ref, cv::Size(frame_width, frame_height), true); 
-    if (!video_writer.isOpened()) { 
-        fprintf(stderr, "Error: Could not open VideoWriter.\n"); 
-        return -1; 
-    } 
-
-    // --- 主循环 --- 
-    std::queue<cv::Mat> frame_queue; 
-    struct timeval time; 
-    gettimeofday(&time, nullptr); 
-    auto startTime = time.tv_sec * 1000 + time.tv_usec / 1000; 
-    int frames = 0; 
-    auto beforeTime = startTime; 
-
-    while (true) 
-    { 
-        cv::Mat img; 
-        if (!capture.read(img)) { 
-            printf("End of video stream.\n"); 
-            break; 
-        } 
-
-        infer_pool.put(img); 
-        frame_queue.push(img); 
-
-        if (frame_queue.size() > threadNum) 
-        { 
-            object_detect_result_list results; 
-            if (infer_pool.get(results) == 0) { 
-                cv::Mat original_frame = frame_queue.front(); 
-                frame_queue.pop(); 
-
-                Visualizer::draw(original_frame, results); 
-
-                // 如果是推流模式，mpph264enc 需要RGB格式，此处进行转换 
-                if (output_mode == OutputMode::RTP_STREAM) { 
-                    cv::cvtColor(original_frame, original_frame, cv::COLOR_BGR2RGB); 
-                } 
-
-                video_writer.write(original_frame); 
-                frames++; 
-            } 
-        } 
-
-        if (frames > 0 && frames % 120 == 0) { 
-            gettimeofday(&time, nullptr); 
-            auto currentTime = time.tv_sec * 1000 + time.tv_usec / 1000; 
-            printf("Average FPS over 120 frames:\t %f fps/s\n", 120.0 / float(currentTime - beforeTime) * 1000.0); 
-            beforeTime = currentTime; 
-        } 
-    } 
-
-    // 清理流水线中剩余的帧 
-    while(!frame_queue.empty()) 
-    { 
-        object_detect_result_list results; 
-        if (infer_pool.get(results) == 0) { 
-            cv::Mat original_frame = frame_queue.front(); 
-            frame_queue.pop(); 
-            Visualizer::draw(original_frame, results); 
-
-            // 同样，如果是推流模式，需要转换颜色 
-            if (output_mode == OutputMode::RTP_STREAM) { 
-                cv::cvtColor(original_frame, original_frame, cv::COLOR_BGR2RGB); 
-            } 
-
-            video_writer.write(original_frame); 
-            frames++; 
-        } else { 
-            break; 
-        } 
-    } 
-
-    gettimeofday(&time, nullptr); 
-    auto endTime = time.tv_sec * 1000 + time.tv_usec / 1000; 
-    printf("\n--- Final Stats ---\n"); 
-    printf("Total frames processed: %d\n", frames); 
-    if (endTime > startTime) { 
-      printf("Total time: %lld ms\n", endTime - startTime); 
-      printf("Overall Average FPS: %f fps/s\n", float(frames) / float(endTime - startTime) * 1000.0); 
-    } 
-
-    capture.release(); 
-    video_writer.release(); 
-    deinit_post_process(); 
-
-    return 0; 
+int main(int argc, char** argv) {
+    using namespace aerial;
+    try {
+        std::string config_path = "config/video.yaml";
+        for (int i = 1; i < argc; ++i) {
+            const std::string arg = argv[i];
+            if (arg == "--help" || arg == "-h") { usage(); return 0; }
+            if (arg == "--config") {
+                if (++i == argc) throw std::runtime_error("Missing --config path");
+                config_path = argv[i];
+            }
+        }
+        AppConfig config = AppConfig::load(config_path);
+        for (int i = 1; i < argc; ++i) {
+            const std::string arg = argv[i];
+            auto value = [&]() -> std::string {
+                if (++i == argc) throw std::runtime_error("Missing value for " + arg);
+                return argv[i];
+            };
+            if (arg == "--config") value();
+            else if (arg == "--model") config.detector.model_path = value();
+            else if (arg == "--input") { config.source.path = value(); config.source.type = "file"; }
+            else if (arg == "--decoder") config.source.decoder = value();
+            else if (arg == "--copy-input") config.source.copy_to_cpu = true;
+            else if (arg == "--no-copy-input") config.source.copy_to_cpu = false;
+            else if (arg == "--calibration") config.calibration = value();
+            else if (arg == "--no-los") config.no_los = true;
+            else if (arg == "--workers") config.workers = unsigned_arg(value());
+            else if (arg == "--cv-threads") config.opencv_threads = unsigned_arg(value());
+            else if (arg == "--core-mask") config.detector.core_mask = unsigned_arg(value());
+            else if (arg == "--input-mode") config.detector.input_mode = value();
+            else if (arg == "--max-frames") config.max_frames = unsigned_arg(value());
+            else if (arg == "--output") config.jsonl = value();
+            else if (arg == "--realtime") config.source.realtime = true;
+            else if (arg == "--offline") config.source.realtime = false;
+            else if (arg == "--preview") config.preview = true;
+            else throw std::runtime_error("Unknown option: " + arg);
+        }
+        config.validate();
+        std::signal(SIGINT, stop_handler);
+        std::signal(SIGTERM, stop_handler);
+        std::signal(SIGPIPE, SIG_IGN);
+        cv::setNumThreads(config.opencv_threads);
+        std::unique_ptr<LosProjector> los;
+        if (!config.no_los) los = std::make_unique<LosProjector>(config.calibration);
+        JsonPublisher publisher(config.jsonl, config.source.realtime, &stop_requested);
+        BotSort tracker(config.tracker);
+        std::vector<std::unique_ptr<YoloV8Detector>> detectors;
+        for (unsigned i = 0; i < config.workers; ++i) {
+            auto dc = config.detector;
+            if (config.workers > 1 && dc.core_mask == 0) dc.core_mask = 1 << i;
+            detectors.emplace_back(new YoloV8Detector(dc));
+        }
+        GstCapture capture(config.source);
+        std::unique_ptr<Preview> preview;
+        if (config.preview || !config.video_pipeline.empty())
+            preview = std::make_unique<Preview>(config.preview, config.video_pipeline, config.source.fps);
+        FrameSlot<Frame> input(config.source.realtime);
+        CompletionQueue completed(config.source.realtime, config.workers);
+        std::mutex error_mutex;
+        std::exception_ptr error;
+        auto fail = [&] {
+            { std::lock_guard<std::mutex> lock(error_mutex); if (!error) error = std::current_exception(); }
+            stop_requested = true;
+            input.close(); completed.close();
+        };
+        std::atomic<unsigned> workers_left{config.workers};
+        std::atomic<std::uint64_t> received{0}, expired{0};
+        const auto started = monotonic_ns();
+        std::vector<std::thread> workers;
+        std::thread reader;
+        std::uint64_t results_count = 0, targets_count = 0;
+        std::deque<double> receiver_latency, source_latency;
+        try {
+            for (unsigned i = 0; i < config.workers; ++i) {
+                workers.emplace_back([&, i] {
+                    try {
+                        Frame frame;
+                        while (!stop_requested && input.get(frame)) {
+                            DetectionPacket packet;
+                            packet.frame = std::move(frame);
+                            packet.inference_start_ns = monotonic_ns();
+                            const auto origin = packet.frame.source_monotonic_ns > 0 ?
+                                packet.frame.source_monotonic_ns : packet.frame.received_ns;
+                            if (config.source.realtime && (packet.inference_start_ns - origin) / 1e6 > config.max_age_ms) {
+                                ++expired; continue;
+                            }
+                            const auto copy_start = monotonic_ns();
+                            if (config.source.copy_to_cpu) {
+                                packet.frame.image = packet.frame.image.clone();
+                                packet.frame.owner.reset();
+                            }
+                            const double copy_ms = config.source.copy_to_cpu ? (monotonic_ns() - copy_start) / 1e6 : 0;
+                            packet.detections = detectors[i]->detect(packet.frame.image, &packet.timing);
+                            packet.timing.preprocess_ms += copy_ms;
+                            packet.detection_ready_ns = monotonic_ns();
+                            if (!completed.put(std::move(packet))) break;
+                        }
+                    } catch (...) { fail(); }
+                    if (--workers_left == 0) completed.close();
+                });
+            }
+            reader = std::thread([&] {
+                try {
+                    Frame frame;
+                    while (!stop_requested && (!config.max_frames || received < config.max_frames) && capture.read(frame, stop_requested)) {
+                        ++received;
+                        if (!input.put(std::move(frame))) break;
+                    }
+                    input.close();
+                } catch (...) { fail(); }
+            });
+            DetectionPacket packet;
+            while (!stop_requested && completed.get(packet)) {
+                const auto track_start = monotonic_ns();
+                const auto origin = packet.frame.source_monotonic_ns > 0 ? packet.frame.source_monotonic_ns : packet.frame.received_ns;
+                if (config.source.realtime && (track_start - origin) / 1e6 > config.max_age_ms) { ++expired; continue; }
+                ResultPacket result;
+                result.completion_queue_ms = (track_start - packet.detection_ready_ns) / 1e6;
+                result.detection = std::move(packet);
+                result.tracks = tracker.update(result.detection.detections, result.detection.frame.image,
+                                               result.detection.frame.tracking_time_seconds, &result.tracker_timing);
+                const auto track_end = monotonic_ns();
+                result.tracking_ms = (track_end - track_start) / 1e6;
+                result.calibrated = bool(los);
+                if (los) {
+                    los->calibration().intrinsicsFor(result.detection.frame.image.size());
+                    for (const auto& target : result.tracks)
+                        result.los.push_back(los->project(target.bbox, result.detection.frame.image.size()));
+                }
+                result.ready_ns = monotonic_ns();
+                result.los_ms = (result.ready_ns - track_end) / 1e6;
+                // LOS becomes available before drawing, encoding, or network video output.
+                if (!publisher.publish(result_json(result))) {
+                    if (stop_requested) break;
+                    throw std::runtime_error("JSON publisher stopped");
+                }
+                ++results_count;
+                targets_count += result.tracks.size();
+                append(receiver_latency, (result.ready_ns - result.detection.frame.received_ns) / 1e6);
+                if (result.detection.frame.source_monotonic_ns > 0)
+                    append(source_latency, (result.ready_ns - result.detection.frame.source_monotonic_ns) / 1e6);
+                if (preview) preview->publish(result);
+            }
+        } catch (...) { fail(); }
+        if (stop_requested) { input.close(); completed.close(); }
+        if (reader.joinable()) reader.join();
+        for (auto& worker : workers) if (worker.joinable()) worker.join();
+        publisher.finish();
+        if (preview) preview->finish();
+        std::cerr << "Summary: received=" << received << " results=" << results_count
+                  << " targets=" << targets_count << " capture_mailbox_dropped=" << input.dropped()
+                  << " completion_dropped=" << completed.dropped() << " expired=" << expired
+                  << " json_dropped=" << publisher.dropped() << " workers=" << config.workers
+                  << " opencv_threads=" << config.opencv_threads
+                  << " elapsed_s=" << (monotonic_ns() - started) / 1e9 << '\n';
+        std::cerr << "Receiver->result ms (last <=4096): p50=" << percentile(receiver_latency, .50)
+                  << " p95=" << percentile(receiver_latency, .95) << " p99=" << percentile(receiver_latency, .99) << '\n';
+        if (!source_latency.empty())
+            std::cerr << "Source PTS->result ESTIMATE ms: p50=" << percentile(source_latency, .50)
+                      << " p95=" << percentile(source_latency, .95) << " p99=" << percentile(source_latency, .99) << '\n';
+        if (error) std::rethrow_exception(error);
+        if (publisher.failed()) return 1;
+        if (!results_count && !stop_requested) throw std::runtime_error("No usable results produced");
+        return 0;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << '\n';
+        return 1;
+    }
 }

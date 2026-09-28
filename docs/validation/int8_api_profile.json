@@ -1,0 +1,185 @@
+{
+  "description": "Synthetic RGB114 640x640 single context, CPU4 affinity, warmup10, 100 iterations, no COLLECT_PERF; output want_float=0",
+  "note": "API wall clock, not camera latency",
+  "cases": {
+    "0": {
+      "timing_ms": {
+        "inputs_set": {
+          "mean": 0.2428,
+          "p50": 0.2463,
+          "p95": 0.2843,
+          "p99": 0.2941
+        },
+        "run": {
+          "mean": 15.7353,
+          "p50": 15.3678,
+          "p95": 17.2396,
+          "p99": 20.7294
+        },
+        "outputs_get": {
+          "mean": 0.5986,
+          "p50": 0.6241,
+          "p95": 0.6813,
+          "p99": 0.6947
+        },
+        "outputs_release": {
+          "mean": 0.0019,
+          "p50": 0.0018,
+          "p95": 0.0026,
+          "p99": 0.0029
+        },
+        "api_total": {
+          "mean": 16.5786,
+          "p50": 16.2498,
+          "p95": 18.1302,
+          "p99": 21.6249
+        },
+        "query_perf_run": {
+          "mean": 15.7333,
+          "p50": 15.3665,
+          "p95": 17.2375,
+          "p99": 20.7275
+        }
+      },
+      "load_samples": [
+        {
+          "time": 6140.727752012,
+          "load": "NPU load:  Core0:  0%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6140.928389533,
+          "load": "NPU load:  Core0:  0%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6141.12892439,
+          "load": "NPU load:  Core0: 22%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6141.329403541,
+          "load": "NPU load:  Core0: 22%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6141.529958523,
+          "load": "NPU load:  Core0: 22%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6141.730894703,
+          "load": "NPU load:  Core0: 22%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6141.931819217,
+          "load": "NPU load:  Core0: 22%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6142.133044431,
+          "load": "NPU load:  Core0: 90%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6142.334320102,
+          "load": "NPU load:  Core0: 90%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6142.535547358,
+          "load": "NPU load:  Core0: 90%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        }
+      ]
+    },
+    "7": {
+      "timing_ms": {
+        "inputs_set": {
+          "mean": 0.1681,
+          "p50": 0.1639,
+          "p95": 0.192,
+          "p99": 0.2012
+        },
+        "run": {
+          "mean": 14.0971,
+          "p50": 13.8778,
+          "p95": 14.9461,
+          "p99": 16.6835
+        },
+        "outputs_get": {
+          "mean": 0.4892,
+          "p50": 0.4735,
+          "p95": 0.5606,
+          "p99": 0.5794
+        },
+        "outputs_release": {
+          "mean": 0.0013,
+          "p50": 0.0012,
+          "p95": 0.0018,
+          "p99": 0.002
+        },
+        "api_total": {
+          "mean": 14.7557,
+          "p50": 14.5484,
+          "p95": 15.581,
+          "p99": 17.4589
+        },
+        "query_perf_run": {
+          "mean": 14.096,
+          "p50": 13.8775,
+          "p95": 14.9451,
+          "p99": 16.6798
+        }
+      },
+      "load_samples": [
+        {
+          "time": 6142.741819143,
+          "load": "NPU load:  Core0: 90%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6142.942851862,
+          "load": "NPU load:  Core0: 90%, Core1:  0%, Core2:  0%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6143.14349726,
+          "load": "NPU load:  Core0: 72%, Core1:  2%, Core2:  2%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6143.344551271,
+          "load": "NPU load:  Core0: 72%, Core1:  2%, Core2:  2%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6143.545605866,
+          "load": "NPU load:  Core0: 72%, Core1:  2%, Core2:  2%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6143.746682627,
+          "load": "NPU load:  Core0: 72%, Core1:  2%, Core2:  2%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6143.947789138,
+          "load": "NPU load:  Core0: 72%, Core1:  2%, Core2:  2%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6144.148886606,
+          "load": "NPU load:  Core0: 90%, Core1:  8%, Core2:  9%,",
+          "freq": "1000000000"
+        },
+        {
+          "time": 6144.34994791,
+          "load": "NPU load:  Core0: 90%, Core1:  8%, Core2:  9%,",
+          "freq": "1000000000"
+        }
+      ]
+    }
+  }
+}

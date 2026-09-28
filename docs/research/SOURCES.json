@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-24",
+  "method": "Read-only targeted source audit, not full security audit or hardware reproduction; external code not executed. Existing local RK3588 JSON and one upstream CSV were reanalyzed.",
+  "repositories": [
+    {
+      "repository": "OrangeKat/ZeroCopyInferenceEngine",
+      "commit": "abaef529e3797da0da61a80a53c553281673512f",
+      "tree_url": "https://github.com/OrangeKat/ZeroCopyInferenceEngine/tree/abaef529e3797da0da61a80a53c553281673512f",
+      "scope": "requested; CUDA/TensorRT pipeline, kernels, synthetic model, timing"
+    },
+    {
+      "repository": "SuyashMullick/real-time-vision-latency-bench",
+      "commit": "7d5a3a52d2f250b2ff729954a34ddf76530c051f",
+      "tree_url": "https://github.com/SuyashMullick/real-time-vision-latency-bench/tree/7d5a3a52d2f250b2ff729954a34ddf76530c051f",
+      "scope": "requested; SPSC/pipeline/timing/inference and existing CSV reanalysis"
+    },
+    {
+      "repository": "wzxzhuxi/rknn-3588-npu-yolo-accelerate-saturated",
+      "commit": "73c9a1bbc33193a152c749a3a24fa00627ea3be9",
+      "tree_url": "https://github.com/wzxzhuxi/rknn-3588-npu-yolo-accelerate-saturated/tree/73c9a1bbc33193a152c749a3a24fa00627ea3be9",
+      "scope": "requested; MPP/RGA/engine/worker pool/ordered completion"
+    },
+    {
+      "repository": "yuunnn-w/rknn-cpp-yolo",
+      "commit": "470b663456ca437ab6cc256bbc04c3b4e1797c7a",
+      "tree_url": "https://github.com/yuunnn-w/rknn-cpp-yolo/tree/470b663456ca437ab6cc256bbc04c3b4e1797c7a",
+      "scope": "requested; native IO/RGA/cropping/output layout/benchmark entry"
+    },
+    {
+      "repository": "dusty-nv/jetson-utils",
+      "commit": "fae4b4250f985ab92180b6ec955b79995b7a34ff",
+      "tree_url": "https://github.com/dusty-nv/jetson-utils/tree/fae4b4250f985ab92180b6ec955b79995b7a34ff",
+      "scope": "additional; latest RingBuffer/gst buffer/copies/timestamps"
+    },
+    {
+      "repository": "raspberrypi/picamera2",
+      "commit": "73ce3b7a27e600abec704a843975f4925f029d0a",
+      "tree_url": "https://github.com/raspberrypi/picamera2/tree/73ce3b7a27e600abec704a843975f4925f029d0a",
+      "scope": "additional; requests/buffer ownership/allocator DMA sync/completed queue"
+    },
+    {
+      "repository": "luxonis/depthai-core",
+      "commit": "e0f6b52d048ef7ceac2ecd44deb2e161dbb97699",
+      "tree_url": "https://github.com/luxonis/depthai-core/tree/e0f6b52d048ef7ceac2ecd44deb2e161dbb97699",
+      "scope": "additional; v2.30.0 pinned stable API, device and host queues/passthrough/timestamps"
+    },
+    {
+      "repository": "NVIDIA-AI-IOT/deepstream_reference_apps",
+      "commit": "9946965e8adb1aa93b1b66983ec4196351c9190c",
+      "tree_url": "https://github.com/NVIDIA-AI-IOT/deepstream_reference_apps/tree/9946965e8adb1aa93b1b66983ec4196351c9190c",
+      "scope": "additional; sample config and probe only; plugin behavior from official documentation"
+    },
+    {
+      "repository": "airockchip/rknn_model_zoo",
+      "commit": "bad6c7334531becaf90a561988519b7bec34d0ab",
+      "tree_url": "https://github.com/airockchip/rknn_model_zoo/tree/bad6c7334531becaf90a561988519b7bec34d0ab",
+      "scope": "additional; pinned version matching current model; yolov8 native IO/image helper"
+    },
+    {
+      "repository": "airockchip/librga",
+      "commit": "2b32edcb97b601b25683e2941d888c8515da6d55",
+      "tree_url": "https://github.com/airockchip/librga/tree/2b32edcb97b601b25683e2941d888c8515da6d55",
+      "scope": "additional; DMA alloc/import, resize/CSC/async samples and official guide/FAQ"
+    },
+    {
+      "repository": "rockchip-linux/mpp",
+      "commit": "14729dd578e570e5f00fd1dd2113f5429012d64b",
+      "tree_url": "https://github.com/rockchip-linux/mpp/tree/14729dd578e570e5f00fd1dd2113f5429012d64b",
+      "scope": "additional; mpi_dec_test buffer info-change/group, API controls; targeted read only"
+    },
+    {
+      "repository": "nyanmisaka/ffmpeg-rockchip",
+      "commit": "d90e3a1c18d7929383cf88c1b3da2e2d1c966cbf",
+      "tree_url": "https://github.com/nyanmisaka/ffmpeg-rockchip/tree/d90e3a1c18d7929383cf88c1b3da2e2d1c966cbf",
+      "scope": "additional; MPP DRM frame export, planes/strides/PTS/lifetime; RGA async FIFO/fence"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+%YAML:1.0
+---
+# TEMPLATE ONLY: these are deliberately invalid placeholders, NOT calibration.
+# Replace every parameter with results from calibration of the actual camera,
+# lens, focus and capture mode; only then set calibrated to 1.
+schema_version: 1
+calibrated: 0
+image_width: 0
+image_height: 0
+fx: 0.0
+fy: 0.0
+cx: 0.0
+cy: 0.0
+distortion_model: "pinhole"   # pinhole or fisheye; coefficients are not interchangeable
+distortion_coefficients: [0.0, 0.0, 0.0, 0.0, 0.0]
+# This declares the source geometry relative to the calibrated image.
+# Cropped, rotated, mirrored or stabilized input needs matching calibration.
+image_geometry: "full_frame"
+# reject: require the exact calibrated dimensions (default/recommended).
+# scale_full_frame: explicitly permit sx/sy scaling of the same complete image.
+resize_policy: "reject"

@@ -1,6 +1,5 @@
-performance.sh
-
-install/Aerial_detection_demo_Linux/Aerial_detection_demo \
-  install/Aerial_detection_demo_Linux/model/RK3588/test.rknn \
-  1080p60hz.mov \
-
+#!/usr/bin/env bash
+set -euo pipefail
+PROJECT_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+if [ "$#" -eq 0 ]; then set -- --no-los; fi
+exec "$PROJECT_ROOT/build/Aerial_detection_demo" --config "$PROJECT_ROOT/config/video.yaml" "$@"

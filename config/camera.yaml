@@ -1,0 +1,40 @@
+%YAML:1.0
+---
+source:
+  type: camera
+  path: /dev/video0
+  decoder: mpp
+  # File replay measured lower latency after copying selected MPP buffers.
+  # Recheck with the actual camera; no camera is attached during development.
+  copy_to_cpu: 1
+  realtime: 1
+  width: 1920
+  height: 1080
+  fps: 30
+  timeout_ms: 5000
+detector:
+  model_path: ../model/RK3588/yolov8n.rknn
+  confidence_threshold: 0.1
+  nms_threshold: 0.7
+  core_mask: 7
+  preprocess: cpu
+  input_mode: fp16_normalized
+tracker:
+  high_thresh: 0.5
+  low_thresh: 0.1
+  new_track_thresh: 0.6
+  match_thresh: 0.8
+  track_buffer_seconds: 1.0
+  prediction_output_seconds: 0.2
+  nominal_fps: 30.0
+  gmc_method: sparseOptFlow
+pipeline:
+  workers: 1
+  opencv_threads: 4
+  max_age_ms: 250.0
+output:
+  jsonl: ../results.jsonl
+  preview: 0
+# Supply --calibration /path/to/real-camera.yaml, or explicitly use --no-los.
+# camera.example.yaml is an invalid template, never a usable calibration.
+calibration: ""

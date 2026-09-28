@@ -1,59 +1,76 @@
 cmake_minimum_required(VERSION 3.10)
-
-project(Aerial_detection_demo)
-
-set(CMAKE_CXX_STANDARD 14)
+project(Aerial_detection_demo LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "-pthread")
-
-if(POLICY CMP0177)
-    cmake_policy(SET CMP0177 NEW)
+set(CMAKE_CXX_EXTENSIONS OFF)
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
-
-# rknn api
-set(RKNN_API_PATH ${CMAKE_SOURCE_DIR}/../../runtime/RK3588/${CMAKE_SYSTEM_NAME}/librknn_api)
-set(LIB_ARCH aarch64)
-set(RKNN_RT_LIB ${CMAKE_SOURCE_DIR}/include/librknnrt.so)
-
-# rga
-set(RGA_PATH ${CMAKE_SOURCE_DIR}/include/3rdparty/rga/RK3588)
-set(RGA_LIB ${RGA_PATH}/lib/Linux/${LIB_ARCH}/librga.so)
-
-include_directories(
-        ${CMAKE_SOURCE_DIR}/include
-        ${RKNN_API_PATH}/include
-        ${CMAKE_SOURCE_DIR}/include/3rdparty
-        ${RGA_PATH}/include
-        ${CMAKE_SOURCE_DIR}/src
-)
-
-# opencv
-find_package(OpenCV REQUIRED)
-message(STATUS "Found OpenCV_DIR: ${OpenCV_DIR}")
-include_directories(${OpenCV_INCLUDE_DIRS})
-
-# 添加可执行文件及其所有源文件
-add_executable(Aerial_detection_demo
-        src/main.cc
-        src/postprocess.cc
-        src/preprocess.cc
-        src/Yolo11.cc
-        src/Visualizer.cc
-        src/dma_alloc.cpp  # <--- 修正：文件扩展名为 .cpp
-)
-
-# 链接所有需要的库
-target_link_libraries(Aerial_detection_demo
-        ${RKNN_RT_LIB}
-        ${OpenCV_LIBS}
-        ${RGA_LIB}
-)
-
-# install target and libraries
-set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install/Aerial_detection_demo_${CMAKE_SYSTEM_NAME})
-set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
-
-install(TARGETS Aerial_detection_demo DESTINATION ./)
-install(PROGRAMS ${RKNN_RT_LIB} DESTINATION lib)
-install(PROGRAMS ${RGA_LIB} DESTINATION lib)
-install(DIRECTORY model DESTINATION ./)
+option(BUILD_RKNN_APP "Build RK3588 RKNN application (disable for CPU-only tests)" ON)
+find_package(Threads REQUIRED)
+find_package(OpenCV 4 REQUIRED COMPONENTS core imgproc calib3d video videoio highgui)
+add_library(aerial_core src/bot_sort.cpp src/los.cpp src/yolo_decode.cpp)
+target_include_directories(aerial_core PUBLIC include ${OpenCV_INCLUDE_DIRS})
+target_link_libraries(aerial_core PUBLIC ${OpenCV_LIBS} Threads::Threads)
+target_compile_options(aerial_core PRIVATE -Wall -Wextra -Wpedantic)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GSTREAMER REQUIRED IMPORTED_TARGET gstreamer-app-1.0>=1.14 gstreamer-video-1.0>=1.14)
+add_library(aerial_io src/capture.cpp src/output.cpp)
+target_link_libraries(aerial_io PUBLIC aerial_core PkgConfig::GSTREAMER)
+target_compile_options(aerial_io PRIVATE -Wall -Wextra -Wpedantic)
+if(BUILD_RKNN_APP)
+    set(RKNN_RT_LIB "${CMAKE_SOURCE_DIR}/include/librknnrt.so" CACHE FILEPATH "RKNN runtime matching model compiler/driver")
+    add_executable(Aerial_detection_demo src/main.cc src/app_config.cpp src/yolov8.cpp)
+    target_link_libraries(Aerial_detection_demo PRIVATE aerial_io "${RKNN_RT_LIB}")
+    target_compile_options(Aerial_detection_demo PRIVATE -Wall -Wextra -Wpedantic)
+    add_executable(profile_rknn tools/profile_rknn.cpp)
+    target_include_directories(profile_rknn PRIVATE include)
+    target_link_libraries(profile_rknn PRIVATE "${RKNN_RT_LIB}")
+    target_compile_options(profile_rknn PRIVATE -Wall -Wextra -Wpedantic)
+    add_executable(profile_input tools/profile_input.cpp)
+    target_include_directories(profile_input PRIVATE include ${OpenCV_INCLUDE_DIRS})
+    target_link_libraries(profile_input PRIVATE ${OpenCV_LIBS} "${RKNN_RT_LIB}")
+    target_compile_options(profile_input PRIVATE -Wall -Wextra -Wpedantic)
+    add_executable(compare_detectors tools/compare_detectors.cpp src/yolov8.cpp)
+    target_link_libraries(compare_detectors PRIVATE aerial_io "${RKNN_RT_LIB}")
+    target_compile_options(compare_detectors PRIVATE -Wall -Wextra -Wpedantic)
+    set_target_properties(Aerial_detection_demo PROPERTIES INSTALL_RPATH "$ORIGIN/lib")
+    if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+        set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/install/Aerial_detection_demo_Linux" CACHE PATH "Install prefix" FORCE)
+    endif()
+    install(TARGETS Aerial_detection_demo RUNTIME DESTINATION .)
+    install(FILES "${RKNN_RT_LIB}" DESTINATION lib)
+    install(DIRECTORY config docs DESTINATION .)
+    install(DIRECTORY third_party/botsort DESTINATION third_party)
+    install(DIRECTORY model/RK3588 DESTINATION model FILES_MATCHING PATTERN "yolov8n.rknn")
+    install(FILES model/RK3588/yolov8n.manifest.json DESTINATION model/RK3588)
+    install(FILES model/RK3588/yolov8n_int8.rknn model/RK3588/yolov8n_int8.manifest.json DESTINATION model/RK3588)
+    install(FILES model/YOLOV8N.md model/prepare_yolov8n.py model/yolov8n.sources.json
+                  model/yolov8n-conversion-requirements.txt DESTINATION model)
+    install(FILES model/YOLOV8N_INT8.md model/prepare_coco20.py model/coco20.sources.json DESTINATION model)
+endif()
+include(CTest)
+if(BUILD_TESTING)
+    foreach(name tracker los detector pipeline input)
+        add_executable(test_${name} tests/test_${name}.cpp)
+        target_link_libraries(test_${name} PRIVATE aerial_core)
+        target_compile_options(test_${name} PRIVATE -UNDEBUG)
+        add_test(NAME ${name} COMMAND test_${name})
+        set_tests_properties(${name} PROPERTIES WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" TIMEOUT 30)
+    endforeach()
+    add_executable(test_capture tests/test_capture.cpp)
+    target_link_libraries(test_capture PRIVATE aerial_io)
+    target_compile_options(test_capture PRIVATE -UNDEBUG)
+    add_test(NAME capture COMMAND test_capture)
+    set_tests_properties(capture PROPERTIES TIMEOUT 20)
+    add_executable(test_output tests/test_output.cpp)
+    target_link_libraries(test_output PRIVATE aerial_io)
+    target_compile_options(test_output PRIVATE -UNDEBUG)
+    add_test(NAME output_backpressure COMMAND test_output)
+    set_tests_properties(output_backpressure PROPERTIES TIMEOUT 10)
+    find_package(Python3 QUIET COMPONENTS Interpreter)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME detector_comparison COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/scripts/test_detector_comparison.py")
+        set_tests_properties(detector_comparison PROPERTIES TIMEOUT 20)
+    endif()
+endif()

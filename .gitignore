@@ -33,6 +33,10 @@
 *.mp4
 /build
 /install
+/results*.jsonl
+/model/onnx/
+__pycache__/
+*.pyc
 /.vscode
 
 *.png

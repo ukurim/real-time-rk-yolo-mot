@@ -1,0 +1,560 @@
+{
+  "model": "YOLOv8n COCO, Rockchip optimized split-head export",
+  "model_zoo_commit": "bad6c7334531becaf90a561988519b7bec34d0ab",
+  "model_zoo_source": "https://github.com/airockchip/rknn_model_zoo/tree/bad6c7334531becaf90a561988519b7bec34d0ab/examples/yolov8",
+  "model_upstream": "https://github.com/airockchip/ultralytics_yolov8",
+  "onnx_url": "https://ftrg.zbox.filez.com/v2/delivery/data/95f00b0fc900458ba134f8b180b3f7a1/examples/yolov8/yolov8n.onnx",
+  "onnx_sha256": "0c8716701f471067932b797eeb67c8e5db47c693c2557c881d7679ec12e21bc5",
+  "onnx_inputs": [
+    {
+      "name": "images",
+      "shape": [
+        1,
+        3,
+        640,
+        640
+      ],
+      "dtype": "FLOAT"
+    }
+  ],
+  "onnx_outputs": [
+    {
+      "name": "318",
+      "shape": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "onnx::ReduceSum_326",
+      "shape": [
+        1,
+        80,
+        80,
+        80
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "331",
+      "shape": [
+        1,
+        1,
+        80,
+        80
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "338",
+      "shape": [
+        1,
+        64,
+        40,
+        40
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "onnx::ReduceSum_346",
+      "shape": [
+        1,
+        80,
+        40,
+        40
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "350",
+      "shape": [
+        1,
+        1,
+        40,
+        40
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "357",
+      "shape": [
+        1,
+        64,
+        20,
+        20
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "onnx::ReduceSum_365",
+      "shape": [
+        1,
+        80,
+        20,
+        20
+      ],
+      "dtype": "FLOAT"
+    },
+    {
+      "name": "369",
+      "shape": [
+        1,
+        1,
+        20,
+        20
+      ],
+      "dtype": "FLOAT"
+    }
+  ],
+  "onnx_opsets": [
+    {
+      "domain": "",
+      "version": 12
+    }
+  ],
+  "toolkit_version": "2.3.2",
+  "toolkit_source_commit": "42aa1d426c0a9e0869b6374edba009f7208a1926",
+  "target_platform": "rk3588",
+  "do_quantization": true,
+  "quantization_dataset": {
+    "schema_version": 1,
+    "purpose": "INT8 calibration only, excluded from held-out evaluation",
+    "source_manifest": "/home/topeet/projects/Aerial_Detection_with_RK3588/model/coco20.sources.json",
+    "source_manifest_sha256": "9b0a43131fd231e094f391bef78d3a45186351acf1b8e26d93c243817ec0eee4",
+    "dataset": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/dataset.txt",
+    "dataset_sha256": "00fe7abd9f06328c273648ccc293db842be98da99da075ca4becb61cac921b8c",
+    "image_count": 20,
+    "preprocessing": {
+      "shape_hwc": [
+        640,
+        640,
+        3
+      ],
+      "pixel_dtype": "uint8",
+      "file_color_space": "RGB",
+      "toolkit_quant_img_RGB2BGR": false,
+      "resize": "OpenCV INTER_LINEAR; positive dimensions rounded half up",
+      "padding": "114 on all channels; left/top floor of remaining/2",
+      "normalization": "none in images; RKNN mean=0 std=255",
+      "opencv_version": "5.0.0"
+    },
+    "images": [
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000005001.png",
+        "sha256": "70a61d957f035ecf3097e9450022b53c801b0b99d3cc9a73fa36a7d1623e1e83",
+        "source_file": "000000005001.jpg",
+        "source_sha256": "99600c56dc25c72dc1cc1d1f2b09aa33b97142560b54d034fa83a38fcf3c5b0f",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000005001.jpg",
+        "original_size_wh": [
+          640,
+          480
+        ],
+        "resized_size_wh": [
+          640,
+          480
+        ],
+        "left_top": [
+          0,
+          80
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000038829.png",
+        "sha256": "a96d3cc048aea889d33663be7e281b0a83c70bb967e7d8baf7d4b9d748b95712",
+        "source_file": "000000038829.jpg",
+        "source_sha256": "73f5b0fe070aaec65bbb7263d16d3d717a75304333fe939dcf086bd85d6ff2f9",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000038829.jpg",
+        "original_size_wh": [
+          640,
+          427
+        ],
+        "resized_size_wh": [
+          640,
+          427
+        ],
+        "left_top": [
+          0,
+          106
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000052891.png",
+        "sha256": "2360ebd02d76c48a15f455ed3204888152f1820e4ab0db4cdeae63c25b4ae51a",
+        "source_file": "000000052891.jpg",
+        "source_sha256": "e55b86a1cda874117ba1bd855e38dbc9b5427b840c362d72330019676ec47a44",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000052891.jpg",
+        "original_size_wh": [
+          640,
+          427
+        ],
+        "resized_size_wh": [
+          640,
+          427
+        ],
+        "left_top": [
+          0,
+          106
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000075612.png",
+        "sha256": "43d87baf5d73a7acca7f674b5be9bcfc0a6755235c3bfef706c11621c78719e1",
+        "source_file": "000000075612.jpg",
+        "source_sha256": "ad55b7fe3105db47f033892e97ffe87a92c3545ae303f129d4bd59c5f211148a",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000075612.jpg",
+        "original_size_wh": [
+          640,
+          480
+        ],
+        "resized_size_wh": [
+          640,
+          480
+        ],
+        "left_top": [
+          0,
+          80
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000098261.png",
+        "sha256": "8fe26b2dad64341d3751fde41e26efdcb1b4604ee09d728d8f04e19c0d3ec29a",
+        "source_file": "000000098261.jpg",
+        "source_sha256": "6d73f5967db3ef19680f17791dd7252e1acf189ddb0cf6590ed211f8da123475",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000098261.jpg",
+        "original_size_wh": [
+          320,
+          216
+        ],
+        "resized_size_wh": [
+          640,
+          432
+        ],
+        "left_top": [
+          0,
+          104
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000181542.png",
+        "sha256": "fa4a4a1c8e7998d7ddd59b9e1de7b1aa6faecde90af0ae46a30a9a33142a27a0",
+        "source_file": "000000181542.jpg",
+        "source_sha256": "c0fdc24e1516a871e5dd195ff34a0da7b2227ef6486492545fb2548743ba4bf5",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000181542.jpg",
+        "original_size_wh": [
+          640,
+          600
+        ],
+        "resized_size_wh": [
+          640,
+          600
+        ],
+        "left_top": [
+          0,
+          20
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000215245.png",
+        "sha256": "5d96a2c407b0d172783cc8b60a91ba8fb863c068cdfbc3005d34c9b9fd232d79",
+        "source_file": "000000215245.jpg",
+        "source_sha256": "8f26d81db7cb960105b0dbfdd5e2846a4aace8d2fb352b0698f00afb3fe6ebb4",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000215245.jpg",
+        "original_size_wh": [
+          640,
+          480
+        ],
+        "resized_size_wh": [
+          640,
+          480
+        ],
+        "left_top": [
+          0,
+          80
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000277005.png",
+        "sha256": "f93bba2129ec68d9b378233097d1baceb6903cc36cd368967e6cad15e8f73da9",
+        "source_file": "000000277005.jpg",
+        "source_sha256": "3cfea124dbcca946c927f9fefe4314b1a41ff8374adb316bdd969aca100b3d85",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000277005.jpg",
+        "original_size_wh": [
+          640,
+          426
+        ],
+        "resized_size_wh": [
+          640,
+          426
+        ],
+        "left_top": [
+          0,
+          107
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000288685.png",
+        "sha256": "81fbdc0e30b528168c7cc0ec6e9fe45573c9b770bcc769df565d1a80da19428d",
+        "source_file": "000000288685.jpg",
+        "source_sha256": "cd33f1aae3ea110b6de7b35f2225bce018cf30248a78652955678d67b4c19a21",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000288685.jpg",
+        "original_size_wh": [
+          640,
+          436
+        ],
+        "resized_size_wh": [
+          640,
+          436
+        ],
+        "left_top": [
+          0,
+          102
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000301421.png",
+        "sha256": "96716aa558ce1880f5b8b6686372cc42219d05fa6db80cc4ba337472c8b8909f",
+        "source_file": "000000301421.jpg",
+        "source_sha256": "a68205cde5ae859ac50c6cb563a0a3e5f7d780f28625afddeb8db153c7dcbb71",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000301421.jpg",
+        "original_size_wh": [
+          640,
+          427
+        ],
+        "resized_size_wh": [
+          640,
+          427
+        ],
+        "left_top": [
+          0,
+          106
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000334371.png",
+        "sha256": "67be3d9382a5e4966ca54b88d2f68a2a147ba145d573fc3d70e31467ce056371",
+        "source_file": "000000334371.jpg",
+        "source_sha256": "92974746d650d1562788bde333d087df29ca666662b5b35855cac1f9e62f21b8",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000334371.jpg",
+        "original_size_wh": [
+          640,
+          419
+        ],
+        "resized_size_wh": [
+          640,
+          419
+        ],
+        "left_top": [
+          0,
+          110
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000348481.png",
+        "sha256": "192b5d878092b487194d8da4ae6179cbd6fae05d7048716378c97b893b040bdd",
+        "source_file": "000000348481.jpg",
+        "source_sha256": "7b4434ecb88a7379cd6d8327692ce2a1255100ef66bebd602b680e00b5a4206a",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000348481.jpg",
+        "original_size_wh": [
+          640,
+          480
+        ],
+        "resized_size_wh": [
+          640,
+          480
+        ],
+        "left_top": [
+          0,
+          80
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000373353.png",
+        "sha256": "6148619710550f56d084752ac16d1c8c840b4a179cebdf51334d1e73b83b9b7e",
+        "source_file": "000000373353.jpg",
+        "source_sha256": "bc8f393230d375ddce63522d13740ccac6419e646560c97695a12ea3cee0e6fa",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000373353.jpg",
+        "original_size_wh": [
+          640,
+          428
+        ],
+        "resized_size_wh": [
+          640,
+          428
+        ],
+        "left_top": [
+          0,
+          106
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000397681.png",
+        "sha256": "75dea43b251d1233f3a7d866a77844f374f34093b5555b6995592d8ed8303465",
+        "source_file": "000000397681.jpg",
+        "source_sha256": "2d0a0055517147f3a0be7a13ab375f2ad3d41194f8a9d33fb510ca058c5e4662",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000397681.jpg",
+        "original_size_wh": [
+          640,
+          640
+        ],
+        "resized_size_wh": [
+          640,
+          640
+        ],
+        "left_top": [
+          0,
+          0
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000414673.png",
+        "sha256": "b9fa2834a3947edb7e4a341e6c0772d9727c36b6a6df3da6e99ab9317841adee",
+        "source_file": "000000414673.jpg",
+        "source_sha256": "6eda0abfc23d8612800893b44c5a1fe8a4ceb0c43cfc86a3c0deac9a0681c53e",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000414673.jpg",
+        "original_size_wh": [
+          500,
+          332
+        ],
+        "resized_size_wh": [
+          640,
+          425
+        ],
+        "left_top": [
+          0,
+          107
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000419312.png",
+        "sha256": "2dcdfa3439feb080e06cbd91cba57368ab7b44ad9893f7fa095acfbf529b05ac",
+        "source_file": "000000419312.jpg",
+        "source_sha256": "7b953b528b2ae9fdc1c768710a8581c397ea552651ceeab6b59d2603f3223417",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000419312.jpg",
+        "original_size_wh": [
+          375,
+          500
+        ],
+        "resized_size_wh": [
+          480,
+          640
+        ],
+        "left_top": [
+          80,
+          0
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000465822.png",
+        "sha256": "234c306656a9bd72c37f9fd510e55c7cb99d4fc3bd881d56961323b3e506c9c4",
+        "source_file": "000000465822.jpg",
+        "source_sha256": "f90159f0241e3358ef8eed729247385f2e682eb48e803ddad9134f41b9d558f3",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000465822.jpg",
+        "original_size_wh": [
+          500,
+          375
+        ],
+        "resized_size_wh": [
+          640,
+          480
+        ],
+        "left_top": [
+          0,
+          80
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000475732.png",
+        "sha256": "d70add9fc788d52a675bb0d099d574b8df44d012797240138083991ae6c45ec1",
+        "source_file": "000000475732.jpg",
+        "source_sha256": "9f2c46374153ac27594475e3b42be01838eb35295068108a89134ad6c73532e7",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000475732.jpg",
+        "original_size_wh": [
+          640,
+          480
+        ],
+        "resized_size_wh": [
+          640,
+          480
+        ],
+        "left_top": [
+          0,
+          80
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000559707.png",
+        "sha256": "f03f227f8a695e4a3b7694813c72659af991ac3fad07c9df6326780efe9ca916",
+        "source_file": "000000559707.jpg",
+        "source_sha256": "50ae104992c88d5356fa5087bd62c51904134cb6ffa507e4c503024c75efe403",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000559707.jpg",
+        "original_size_wh": [
+          478,
+          640
+        ],
+        "resized_size_wh": [
+          478,
+          640
+        ],
+        "left_top": [
+          81,
+          0
+        ]
+      },
+      {
+        "path": "/home/topeet/projects/Aerial_Detection_with_RK3588/build/model_prepare/coco20/letterbox640/000000574315.png",
+        "sha256": "4ef3492806f9e27d38e972f000b292a6125889510ee3346738bd8c60e64a743b",
+        "source_file": "000000574315.jpg",
+        "source_sha256": "b4f4f99c9f1231ed99efa94744f4ae8ef9657ff69ce14a8d0ca60c7f5974dc13",
+        "source_url": "https://raw.githubusercontent.com/airockchip/rknn_model_zoo/bad6c7334531becaf90a561988519b7bec34d0ab/datasets/COCO/subset/000000574315.jpg",
+        "original_size_wh": [
+          640,
+          480
+        ],
+        "resized_size_wh": [
+          640,
+          480
+        ],
+        "left_top": [
+          0,
+          80
+        ]
+      }
+    ]
+  },
+  "quantization": {
+    "dtype": "w8a8",
+    "algorithm": "normal",
+    "method": "channel",
+    "quant_img_RGB2BGR": false
+  },
+  "mean_values": [
+    [
+      0,
+      0,
+      0
+    ]
+  ],
+  "std_values": [
+    [
+      255,
+      255,
+      255
+    ]
+  ],
+  "input_pixels": "RGB uint8 0..255; normalizing by 255 is embedded in RKNN",
+  "decoder_layout": "split9: (DFL box logits, sigmoid class scores, class-score sum) at strides 8,16,32",
+  "class_count": 80,
+  "bbox_distribution_bins": 16,
+  "rknn_file": "yolov8n_int8.rknn",
+  "rknn_size_bytes": 4327819,
+  "rknn_sha256": "6d31f73602f2295ef29ea4d0a7984e458dc19a3b94dbb2a886c1a0e583039661",
+  "conversion_host": {
+    "machine": "aarch64",
+    "python": "3.8.10",
+    "platform": "Linux-5.10.198-aarch64-with-glibc2.29"
+  },
+  "created_utc": "2026-09-24T11:46:01.872863+00:00"
+}

@@ -1,0 +1,2922 @@
+{
+  "date": "2026-09-24",
+  "timing_units": "ms",
+  "measurement": "video replay PTS/receiver to detection + tracking ready; no real camera/calibration/LOS",
+  "input": "1080p60hz.mov",
+  "video_sha256": "9e60c1ee13e3804cf16ca8ab88eecc8f89b52367889b8b9556f09ea2e18113d3",
+  "decoder": "MPP format=BGR, selected frames copied to CPU",
+  "sensor_capture_latency_measured": false,
+  "system_frequencies_modified": false,
+  "runs": [
+    {
+      "run_directory": "build/int8_cv1",
+      "received_frame_limit": 300,
+      "warmup_output_records": 10,
+      "cases": [
+        {
+          "name": "one_auto",
+          "workers": 1,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv1/one_auto.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "1",
+            "--copy-input"
+          ],
+          "output_frames": 112,
+          "measured_frames": 102,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 98.845807,
+            "p95": 111.394719,
+            "p99": 114.294975
+          },
+          "source_to_result_estimate": {
+            "p50": 99.013573,
+            "p95": 111.894907,
+            "p99": 114.454777
+          },
+          "queue": {
+            "p50": 9.004676,
+            "p95": 16.216815,
+            "p99": 16.584305
+          },
+          "preprocess": {
+            "p50": 9.558827,
+            "p95": 10.644381,
+            "p99": 11.026746
+          },
+          "inference": {
+            "p50": 16.483975,
+            "p95": 17.752107,
+            "p99": 18.201845
+          },
+          "input_submit": {
+            "p50": 0.203578,
+            "p95": 0.305075,
+            "p99": 0.347657
+          },
+          "rknn_run": {
+            "p50": 15.634956,
+            "p95": 16.874214,
+            "p99": 17.181622
+          },
+          "output_get": {
+            "p50": 0.579818,
+            "p95": 0.900351,
+            "p99": 1.014973
+          },
+          "postprocess": {
+            "p50": 3.360493,
+            "p95": 3.529072,
+            "p99": 3.589445
+          },
+          "tracking": {
+            "p50": 44.833214,
+            "p95": 47.805801,
+            "p99": 50.714806
+          },
+          "tracking_gmc": {
+            "p50": 44.767007,
+            "p95": 47.722969,
+            "p99": 50.656474
+          },
+          "tracking_association": {
+            "p50": 0.062415,
+            "p95": 0.077582,
+            "p99": 0.08079
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.130955,
+            "p95": 0.153121,
+            "p99": 0.160412
+          },
+          "output_validation": {
+            "frames": 112,
+            "targets": 986,
+            "predicted_targets": 70
+          },
+          "jsonl_sha256": "b9df9a554debc0d3fe04cfb8a4172d3ff47b0a22dc75d96c4d51919b3febf665",
+          "application_summary": {
+            "received": "300",
+            "results": "112",
+            "targets": "986",
+            "capture_mailbox_dropped": "131",
+            "completion_dropped": "57",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "1",
+            "elapsed_s": "5.10135"
+          }
+        },
+        {
+          "name": "one_all_cores",
+          "workers": 1,
+          "core_mask": 7,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "7",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv1/one_all_cores.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "1",
+            "--copy-input"
+          ],
+          "output_frames": 113,
+          "measured_frames": 103,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 96.930484,
+            "p95": 112.644772,
+            "p99": 117.208065
+          },
+          "source_to_result_estimate": {
+            "p50": 97.077707,
+            "p95": 112.845895,
+            "p99": 117.405959
+          },
+          "queue": {
+            "p50": 8.886553,
+            "p95": 16.086152,
+            "p99": 16.585472
+          },
+          "preprocess": {
+            "p50": 9.499621,
+            "p95": 10.85525,
+            "p99": 11.463068
+          },
+          "inference": {
+            "p50": 15.975613,
+            "p95": 17.362742,
+            "p99": 17.775732
+          },
+          "input_submit": {
+            "p50": 0.20387,
+            "p95": 0.348532,
+            "p99": 0.480945
+          },
+          "rknn_run": {
+            "p50": 15.074387,
+            "p95": 16.496224,
+            "p99": 16.702428
+          },
+          "output_get": {
+            "p50": 0.580984,
+            "p95": 0.885184,
+            "p99": 1.003015
+          },
+          "postprocess": {
+            "p50": 3.361368,
+            "p95": 3.52178,
+            "p99": 3.570488
+          },
+          "tracking": {
+            "p50": 44.991293,
+            "p95": 48.280622,
+            "p99": 49.555171
+          },
+          "tracking_gmc": {
+            "p50": 44.93092,
+            "p95": 48.173291,
+            "p99": 49.482548
+          },
+          "tracking_association": {
+            "p50": 0.060082,
+            "p95": 0.079331,
+            "p99": 0.090123
+          },
+          "los": {
+            "p50": 0.000291,
+            "p95": 0.000292,
+            "p99": 0.000583
+          },
+          "publisher_wait": {
+            "p50": 0.139705,
+            "p95": 0.169162,
+            "p99": 0.202119
+          },
+          "output_validation": {
+            "frames": 113,
+            "targets": 986,
+            "predicted_targets": 61
+          },
+          "jsonl_sha256": "6bcea82b4013a3395fb3381c6847ec54e76261059379a07a2a2be380223956cd",
+          "application_summary": {
+            "received": "300",
+            "results": "113",
+            "targets": "986",
+            "capture_mailbox_dropped": "127",
+            "completion_dropped": "60",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "1",
+            "elapsed_s": "5.11989"
+          }
+        },
+        {
+          "name": "two_instances",
+          "workers": 2,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "2",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv1/two_instances.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "1",
+            "--copy-input"
+          ],
+          "output_frames": 110,
+          "measured_frames": 100,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 84.721646,
+            "p95": 93.252668,
+            "p99": 94.380513
+          },
+          "source_to_result_estimate": {
+            "p50": 85.085718,
+            "p95": 93.506214,
+            "p99": 94.671568
+          },
+          "queue": {
+            "p50": 0.289034,
+            "p95": 0.414739,
+            "p99": 0.482404
+          },
+          "preprocess": {
+            "p50": 11.222741,
+            "p95": 12.66091,
+            "p99": 12.793323
+          },
+          "inference": {
+            "p50": 16.308105,
+            "p95": 17.393075,
+            "p99": 17.66461
+          },
+          "input_submit": {
+            "p50": 0.201828,
+            "p95": 0.3007,
+            "p99": 0.346782
+          },
+          "rknn_run": {
+            "p50": 15.447711,
+            "p95": 16.567098,
+            "p99": 16.856715
+          },
+          "output_get": {
+            "p50": 0.633483,
+            "p95": 0.741105,
+            "p99": 0.792145
+          },
+          "postprocess": {
+            "p50": 3.401908,
+            "p95": 3.458782,
+            "p99": 3.478907
+          },
+          "tracking": {
+            "p50": 45.816689,
+            "p95": 48.764193,
+            "p99": 49.480799
+          },
+          "tracking_gmc": {
+            "p50": 45.758649,
+            "p95": 48.690986,
+            "p99": 49.4248
+          },
+          "tracking_association": {
+            "p50": 0.065332,
+            "p95": 0.079623,
+            "p99": 0.094789
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.118706,
+            "p95": 0.170037,
+            "p99": 0.208828
+          },
+          "output_validation": {
+            "frames": 110,
+            "targets": 987,
+            "predicted_targets": 72
+          },
+          "jsonl_sha256": "de639f9a9f3238c4367b1befafa176507abb7be4cd9875becada4f38f881c3e3",
+          "application_summary": {
+            "received": "300",
+            "results": "110",
+            "targets": "987",
+            "capture_mailbox_dropped": "1",
+            "completion_dropped": "189",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "2",
+            "opencv_threads": "1",
+            "elapsed_s": "5.10466"
+          }
+        },
+        {
+          "name": "three_instances",
+          "workers": 3,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "3",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv1/three_instances.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "1",
+            "--copy-input"
+          ],
+          "output_frames": 110,
+          "measured_frames": 100,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 86.897714,
+            "p95": 96.365545,
+            "p99": 100.723219
+          },
+          "source_to_result_estimate": {
+            "p50": 87.17606,
+            "p95": 96.636805,
+            "p99": 100.956132
+          },
+          "queue": {
+            "p50": 0.18812,
+            "p95": 0.398114,
+            "p99": 0.466363
+          },
+          "preprocess": {
+            "p50": 11.287489,
+            "p95": 12.566121,
+            "p99": 12.973278
+          },
+          "inference": {
+            "p50": 16.566223,
+            "p95": 17.960644,
+            "p99": 18.23772
+          },
+          "input_submit": {
+            "p50": 0.207661,
+            "p95": 0.279993,
+            "p99": 0.341824
+          },
+          "rknn_run": {
+            "p50": 15.703788,
+            "p95": 16.93138,
+            "p99": 17.358077
+          },
+          "output_get": {
+            "p50": 0.601984,
+            "p95": 0.706106,
+            "p99": 0.856893
+          },
+          "postprocess": {
+            "p50": 3.369826,
+            "p95": 3.471615,
+            "p99": 3.616861
+          },
+          "tracking": {
+            "p50": 45.742025,
+            "p95": 48.943564,
+            "p99": 49.850915
+          },
+          "tracking_gmc": {
+            "p50": 45.682234,
+            "p95": 48.876191,
+            "p99": 49.767792
+          },
+          "tracking_association": {
+            "p50": 0.061832,
+            "p95": 0.080498,
+            "p99": 0.094789
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.123664,
+            "p95": 0.16537,
+            "p99": 0.179662
+          },
+          "output_validation": {
+            "frames": 110,
+            "targets": 972,
+            "predicted_targets": 69
+          },
+          "jsonl_sha256": "fba1cd2043cd0339134a99ca589e83702637d18102fa215de78f90a95fd7b913",
+          "application_summary": {
+            "received": "300",
+            "results": "110",
+            "targets": "972",
+            "capture_mailbox_dropped": "0",
+            "completion_dropped": "190",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "3",
+            "opencv_threads": "1",
+            "elapsed_s": "5.09599"
+          }
+        }
+      ]
+    },
+    {
+      "run_directory": "build/int8_cv2",
+      "received_frame_limit": 300,
+      "warmup_output_records": 10,
+      "cases": [
+        {
+          "name": "one_auto",
+          "workers": 1,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv2/one_auto.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "2",
+            "--copy-input"
+          ],
+          "output_frames": 168,
+          "measured_frames": 158,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 80.244697,
+            "p95": 90.291762,
+            "p99": 93.843292
+          },
+          "source_to_result_estimate": {
+            "p50": 80.440791,
+            "p95": 90.462481,
+            "p99": 94.145351
+          },
+          "queue": {
+            "p50": 8.654978,
+            "p95": 15.461713,
+            "p99": 16.382481
+          },
+          "preprocess": {
+            "p50": 9.066509,
+            "p95": 10.569719,
+            "p99": 10.813837
+          },
+          "inference": {
+            "p50": 16.47202,
+            "p95": 17.640988,
+            "p99": 18.147309
+          },
+          "input_submit": {
+            "p50": 0.195995,
+            "p95": 0.281451,
+            "p99": 0.356699
+          },
+          "rknn_run": {
+            "p50": 15.478921,
+            "p95": 16.674431,
+            "p99": 17.15421
+          },
+          "output_get": {
+            "p50": 0.678107,
+            "p95": 1.01614,
+            "p99": 1.109179
+          },
+          "postprocess": {
+            "p50": 3.488824,
+            "p95": 3.636112,
+            "p99": 3.695609
+          },
+          "tracking": {
+            "p50": 29.803457,
+            "p95": 31.437329,
+            "p99": 33.391735
+          },
+          "tracking_gmc": {
+            "p50": 29.741625,
+            "p95": 31.357415,
+            "p99": 33.338945
+          },
+          "tracking_association": {
+            "p50": 0.058915,
+            "p95": 0.070289,
+            "p99": 0.076123
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.129788,
+            "p95": 0.167121,
+            "p99": 0.178787
+          },
+          "output_validation": {
+            "frames": 168,
+            "targets": 1533,
+            "predicted_targets": 105
+          },
+          "jsonl_sha256": "31ed25697a4b14019e83ea6fb40f7773b22c006df3502375f26bdf6983a34c45",
+          "application_summary": {
+            "received": "300",
+            "results": "168",
+            "targets": "1533",
+            "capture_mailbox_dropped": "131",
+            "completion_dropped": "1",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "2",
+            "elapsed_s": "5.08162"
+          }
+        },
+        {
+          "name": "one_all_cores",
+          "workers": 1,
+          "core_mask": 7,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "7",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv2/one_all_cores.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "2",
+            "--copy-input"
+          ],
+          "output_frames": 167,
+          "measured_frames": 157,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 81.953818,
+            "p95": 91.709517,
+            "p99": 94.329781
+          },
+          "source_to_result_estimate": {
+            "p50": 82.185434,
+            "p95": 91.853438,
+            "p99": 94.589428
+          },
+          "queue": {
+            "p50": 8.865847,
+            "p95": 16.15382,
+            "p99": 16.513728
+          },
+          "preprocess": {
+            "p50": 9.325793,
+            "p95": 10.39414,
+            "p99": 11.110746
+          },
+          "inference": {
+            "p50": 16.143612,
+            "p95": 17.492826,
+            "p99": 17.894149
+          },
+          "input_submit": {
+            "p50": 0.192786,
+            "p95": 0.289326,
+            "p99": 0.411239
+          },
+          "rknn_run": {
+            "p50": 15.294009,
+            "p95": 16.616683,
+            "p99": 16.759596
+          },
+          "output_get": {
+            "p50": 0.655649,
+            "p95": 0.970058,
+            "p99": 1.301674
+          },
+          "postprocess": {
+            "p50": 3.430201,
+            "p95": 3.564364,
+            "p99": 3.636695
+          },
+          "tracking": {
+            "p50": 30.12924,
+            "p95": 31.544952,
+            "p99": 32.796169
+          },
+          "tracking_gmc": {
+            "p50": 30.078491,
+            "p95": 31.481371,
+            "p99": 32.721212
+          },
+          "tracking_association": {
+            "p50": 0.058332,
+            "p95": 0.073498,
+            "p99": 0.078748
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000583
+          },
+          "publisher_wait": {
+            "p50": 0.140579,
+            "p95": 0.176454,
+            "p99": 0.201828
+          },
+          "output_validation": {
+            "frames": 167,
+            "targets": 1525,
+            "predicted_targets": 110
+          },
+          "jsonl_sha256": "3aec5e615e04cb0d7642081773271da137550bf427927002588d0bdd5f8d7e46",
+          "application_summary": {
+            "received": "300",
+            "results": "167",
+            "targets": "1525",
+            "capture_mailbox_dropped": "129",
+            "completion_dropped": "4",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "2",
+            "elapsed_s": "5.08372"
+          }
+        },
+        {
+          "name": "two_instances",
+          "workers": 2,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "2",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv2/two_instances.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "2",
+            "--copy-input"
+          ],
+          "output_frames": 162,
+          "measured_frames": 152,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 68.629674,
+            "p95": 75.892856,
+            "p99": 78.111797
+          },
+          "source_to_result_estimate": {
+            "p50": 68.840632,
+            "p95": 76.16424,
+            "p99": 78.497521
+          },
+          "queue": {
+            "p50": 0.283784,
+            "p95": 0.49757,
+            "p99": 0.873227
+          },
+          "preprocess": {
+            "p50": 10.245978,
+            "p95": 11.485819,
+            "p99": 12.155469
+          },
+          "inference": {
+            "p50": 16.807428,
+            "p95": 18.128642,
+            "p99": 18.738794
+          },
+          "input_submit": {
+            "p50": 0.214078,
+            "p95": 0.297492,
+            "p99": 0.388781
+          },
+          "rknn_run": {
+            "p50": 15.925451,
+            "p95": 17.287207,
+            "p99": 17.736945
+          },
+          "output_get": {
+            "p50": 0.626191,
+            "p95": 0.924267,
+            "p99": 1.135137
+          },
+          "postprocess": {
+            "p50": 3.426992,
+            "p95": 3.617153,
+            "p99": 3.653611
+          },
+          "tracking": {
+            "p50": 30.91876,
+            "p95": 32.987789,
+            "p99": 40.888538
+          },
+          "tracking_gmc": {
+            "p50": 30.869178,
+            "p95": 32.922457,
+            "p99": 40.824081
+          },
+          "tracking_association": {
+            "p50": 0.059207,
+            "p95": 0.073498,
+            "p99": 0.08429
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.132996,
+            "p95": 0.174412,
+            "p99": 0.217286
+          },
+          "output_validation": {
+            "frames": 162,
+            "targets": 1475,
+            "predicted_targets": 103
+          },
+          "jsonl_sha256": "8939574242c9f16f08894e1dc252e86f74ffc90a553400c29bd3ce2ba2929e57",
+          "application_summary": {
+            "received": "300",
+            "results": "162",
+            "targets": "1475",
+            "capture_mailbox_dropped": "3",
+            "completion_dropped": "135",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "2",
+            "opencv_threads": "2",
+            "elapsed_s": "5.07127"
+          }
+        },
+        {
+          "name": "three_instances",
+          "workers": 3,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "3",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv2/three_instances.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "2",
+            "--copy-input"
+          ],
+          "output_frames": 162,
+          "measured_frames": 152,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 70.400628,
+            "p95": 83.774939,
+            "p99": 88.337068
+          },
+          "source_to_result_estimate": {
+            "p50": 70.608146,
+            "p95": 83.946126,
+            "p99": 88.64319
+          },
+          "queue": {
+            "p50": 0.266576,
+            "p95": 0.37274,
+            "p99": 0.435738
+          },
+          "preprocess": {
+            "p50": 10.228478,
+            "p95": 11.907558,
+            "p99": 12.587706
+          },
+          "inference": {
+            "p50": 16.861093,
+            "p95": 18.428177,
+            "p99": 19.402901
+          },
+          "input_submit": {
+            "p50": 0.214369,
+            "p95": 0.347074,
+            "p99": 0.416781
+          },
+          "rknn_run": {
+            "p50": 15.944701,
+            "p95": 17.470952,
+            "p99": 17.867025
+          },
+          "output_get": {
+            "p50": 0.641941,
+            "p95": 0.925434,
+            "p99": 1.729537
+          },
+          "postprocess": {
+            "p50": 3.454117,
+            "p95": 3.659736,
+            "p99": 13.15615
+          },
+          "tracking": {
+            "p50": 30.911178,
+            "p95": 32.820086,
+            "p99": 33.224033
+          },
+          "tracking_gmc": {
+            "p50": 30.847888,
+            "p95": 32.751837,
+            "p99": 33.151994
+          },
+          "tracking_association": {
+            "p50": 0.060082,
+            "p95": 0.076123,
+            "p99": 0.083123
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.11958,
+            "p95": 0.167703,
+            "p99": 0.194829
+          },
+          "output_validation": {
+            "frames": 162,
+            "targets": 1484,
+            "predicted_targets": 105
+          },
+          "jsonl_sha256": "5a94e0fb4ab6e7e972dc48486034ac5509394e6e89a9efff9c2e6eeacd5ee6af",
+          "application_summary": {
+            "received": "300",
+            "results": "162",
+            "targets": "1484",
+            "capture_mailbox_dropped": "1",
+            "completion_dropped": "137",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "3",
+            "opencv_threads": "2",
+            "elapsed_s": "5.06268"
+          }
+        }
+      ]
+    },
+    {
+      "run_directory": "build/int8_cv4",
+      "received_frame_limit": 300,
+      "warmup_output_records": 10,
+      "cases": [
+        {
+          "name": "one_auto",
+          "workers": 1,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv4/one_auto.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 161,
+          "measured_frames": 151,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 66.384486,
+            "p95": 74.15253,
+            "p99": 76.720295
+          },
+          "source_to_result_estimate": {
+            "p50": 66.554933,
+            "p95": 74.310375,
+            "p99": 76.848214
+          },
+          "queue": {
+            "p50": 9.182589,
+            "p95": 15.951409,
+            "p99": 16.328233
+          },
+          "preprocess": {
+            "p50": 10.812962,
+            "p95": 11.803728,
+            "p99": 12.262507
+          },
+          "inference": {
+            "p50": 16.381315,
+            "p95": 17.69553,
+            "p99": 18.284098
+          },
+          "input_submit": {
+            "p50": 0.2937,
+            "p95": 0.364282,
+            "p99": 0.499612
+          },
+          "rknn_run": {
+            "p50": 15.456172,
+            "p95": 16.865469,
+            "p99": 17.48816
+          },
+          "output_get": {
+            "p50": 0.597901,
+            "p95": 0.711647,
+            "p99": 0.902684
+          },
+          "postprocess": {
+            "p50": 3.37916,
+            "p95": 3.472491,
+            "p99": 3.501074
+          },
+          "tracking": {
+            "p50": 26.190096,
+            "p95": 29.253681,
+            "p99": 29.788291
+          },
+          "tracking_gmc": {
+            "p50": 26.127973,
+            "p95": 29.215474,
+            "p99": 29.745418
+          },
+          "tracking_association": {
+            "p50": 0.056874,
+            "p95": 0.067956,
+            "p99": 0.075248
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.097414,
+            "p95": 0.142329,
+            "p99": 0.14758
+          },
+          "output_validation": {
+            "frames": 161,
+            "targets": 1451,
+            "predicted_targets": 108
+          },
+          "jsonl_sha256": "c81ec320d3b3bc6748cb97cde937f3c3e65c95c317594d3bbb68b830256bd3eb",
+          "application_summary": {
+            "received": "300",
+            "results": "161",
+            "targets": "1451",
+            "capture_mailbox_dropped": "139",
+            "completion_dropped": "0",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "4",
+            "elapsed_s": "5.07739"
+          }
+        },
+        {
+          "name": "one_all_cores",
+          "workers": 1,
+          "core_mask": 7,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "7",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv4/one_all_cores.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 163,
+          "measured_frames": 153,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 65.914916,
+            "p95": 71.639306,
+            "p99": 73.004853
+          },
+          "source_to_result_estimate": {
+            "p50": 66.066452,
+            "p95": 71.949608,
+            "p99": 73.176384
+          },
+          "queue": {
+            "p50": 8.766392,
+            "p95": 15.569045,
+            "p99": 16.447813
+          },
+          "preprocess": {
+            "p50": 10.639134,
+            "p95": 11.687064,
+            "p99": 12.000015
+          },
+          "inference": {
+            "p50": 16.015575,
+            "p95": 17.487577,
+            "p99": 17.885109
+          },
+          "input_submit": {
+            "p50": 0.272118,
+            "p95": 0.359907,
+            "p99": 0.550361
+          },
+          "rknn_run": {
+            "p50": 15.114641,
+            "p95": 16.465021,
+            "p99": 17.008381
+          },
+          "output_get": {
+            "p50": 0.605484,
+            "p95": 0.842894,
+            "p99": 1.117929
+          },
+          "postprocess": {
+            "p50": 3.416493,
+            "p95": 3.510699,
+            "p99": 3.540156
+          },
+          "tracking": {
+            "p50": 26.218971,
+            "p95": 27.318233,
+            "p99": 29.261265
+          },
+          "tracking_gmc": {
+            "p50": 26.145764,
+            "p95": 27.266026,
+            "p99": 29.183391
+          },
+          "tracking_association": {
+            "p50": 0.059207,
+            "p95": 0.072915,
+            "p99": 0.084872
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.104706,
+            "p95": 0.165662,
+            "p99": 0.193078
+          },
+          "output_validation": {
+            "frames": 163,
+            "targets": 1491,
+            "predicted_targets": 108
+          },
+          "jsonl_sha256": "cdc2d6860a149aa71805c4a6088f0edec6ee4004255f632aa139ba12a4759a17",
+          "application_summary": {
+            "received": "300",
+            "results": "163",
+            "targets": "1491",
+            "capture_mailbox_dropped": "137",
+            "completion_dropped": "0",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "4",
+            "elapsed_s": "5.07133"
+          }
+        },
+        {
+          "name": "two_instances",
+          "workers": 2,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "2",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv4/two_instances.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 176,
+          "measured_frames": 166,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 70.951283,
+            "p95": 78.109176,
+            "p99": 79.847173
+          },
+          "source_to_result_estimate": {
+            "p50": 71.140116,
+            "p95": 78.395334,
+            "p99": 80.117744
+          },
+          "queue": {
+            "p50": 0.421448,
+            "p95": 3.34737,
+            "p99": 6.39258
+          },
+          "preprocess": {
+            "p50": 10.899003,
+            "p95": 12.727122,
+            "p99": 13.133985
+          },
+          "inference": {
+            "p50": 17.122128,
+            "p95": 18.611631,
+            "p99": 19.215657
+          },
+          "input_submit": {
+            "p50": 0.217577,
+            "p95": 0.346491,
+            "p99": 0.410364
+          },
+          "rknn_run": {
+            "p50": 16.185903,
+            "p95": 17.558451,
+            "p99": 18.011688
+          },
+          "output_get": {
+            "p50": 0.693857,
+            "p95": 1.069804,
+            "p99": 1.600915
+          },
+          "postprocess": {
+            "p50": 3.513615,
+            "p95": 3.717776,
+            "p99": 5.091781
+          },
+          "tracking": {
+            "p50": 27.57256,
+            "p95": 32.029691,
+            "p99": 34.142178
+          },
+          "tracking_gmc": {
+            "p50": 27.494104,
+            "p95": 31.970485,
+            "p99": 34.079179
+          },
+          "tracking_association": {
+            "p50": 0.06154,
+            "p95": 0.074373,
+            "p99": 0.083707
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.117539,
+            "p95": 0.178787,
+            "p99": 0.200078
+          },
+          "output_validation": {
+            "frames": 176,
+            "targets": 1614,
+            "predicted_targets": 120
+          },
+          "jsonl_sha256": "003383707afafe1d3bc8b4b54b48dbdb7cd3eee5c0538d0c303f29f8690271e8",
+          "application_summary": {
+            "received": "300",
+            "results": "176",
+            "targets": "1614",
+            "capture_mailbox_dropped": "2",
+            "completion_dropped": "122",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "2",
+            "opencv_threads": "4",
+            "elapsed_s": "5.08005"
+          }
+        },
+        {
+          "name": "three_instances",
+          "workers": 3,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "3",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv4/three_instances.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 175,
+          "measured_frames": 165,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 71.642224,
+            "p95": 78.933114,
+            "p99": 82.532769
+          },
+          "source_to_result_estimate": {
+            "p50": 71.965883,
+            "p95": 79.254529,
+            "p99": 82.848445
+          },
+          "queue": {
+            "p50": 0.291367,
+            "p95": 0.454405,
+            "p99": 0.615108
+          },
+          "preprocess": {
+            "p50": 11.507403,
+            "p95": 13.147109,
+            "p99": 14.241413
+          },
+          "inference": {
+            "p50": 17.316666,
+            "p95": 18.947914,
+            "p99": 20.96736
+          },
+          "input_submit": {
+            "p50": 0.215244,
+            "p95": 0.324324,
+            "p99": 0.388489
+          },
+          "rknn_run": {
+            "p50": 16.352732,
+            "p95": 17.722072,
+            "p99": 19.161992
+          },
+          "output_get": {
+            "p50": 0.69444,
+            "p95": 1.600041,
+            "p99": 1.823743
+          },
+          "postprocess": {
+            "p50": 3.528781,
+            "p95": 4.651085,
+            "p99": 9.293712
+          },
+          "tracking": {
+            "p50": 27.633226,
+            "p95": 32.195938,
+            "p99": 32.967084
+          },
+          "tracking_gmc": {
+            "p50": 27.569644,
+            "p95": 32.146064,
+            "p99": 32.904377
+          },
+          "tracking_association": {
+            "p50": 0.060082,
+            "p95": 0.078457,
+            "p99": 0.084872
+          },
+          "los": {
+            "p50": 0.000291,
+            "p95": 0.000292,
+            "p99": 0.000584
+          },
+          "publisher_wait": {
+            "p50": 0.143204,
+            "p95": 0.180246,
+            "p99": 0.205328
+          },
+          "output_validation": {
+            "frames": 175,
+            "targets": 1613,
+            "predicted_targets": 125
+          },
+          "jsonl_sha256": "13b2351177e3d4aca3814000807d849e2b44fbf1707583a79226e5eb90a273c9",
+          "application_summary": {
+            "received": "300",
+            "results": "175",
+            "targets": "1613",
+            "capture_mailbox_dropped": "2",
+            "completion_dropped": "123",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "3",
+            "opencv_threads": "4",
+            "elapsed_s": "5.06139"
+          }
+        }
+      ]
+    },
+    {
+      "run_directory": "build/int8_cv8",
+      "received_frame_limit": 300,
+      "warmup_output_records": 10,
+      "cases": [
+        {
+          "name": "one_auto",
+          "workers": 1,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv8/one_auto.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "8",
+            "--copy-input"
+          ],
+          "output_frames": 129,
+          "measured_frames": 119,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 66.366136,
+            "p95": 77.45997,
+            "p99": 88.397475
+          },
+          "source_to_result_estimate": {
+            "p50": 66.468738,
+            "p95": 77.868925,
+            "p99": 88.532922
+          },
+          "queue": {
+            "p50": 7.713215,
+            "p95": 14.221877,
+            "p99": 15.259309
+          },
+          "completion_queue": {
+            "p50": 0.01225,
+            "p95": 0.018958,
+            "p99": 10.373437
+          },
+          "preprocess": {
+            "p50": 10.723427,
+            "p95": 11.903772,
+            "p99": 12.108516
+          },
+          "inference": {
+            "p50": 20.673667,
+            "p95": 23.304139,
+            "p99": 23.476801
+          },
+          "input_submit": {
+            "p50": 0.282325,
+            "p95": 0.384115,
+            "p99": 0.464321
+          },
+          "rknn_run": {
+            "p50": 19.72665,
+            "p95": 22.468828,
+            "p99": 22.696905
+          },
+          "output_get": {
+            "p50": 0.578943,
+            "p95": 0.82452,
+            "p99": 1.053473
+          },
+          "postprocess": {
+            "p50": 3.331913,
+            "p95": 3.400745,
+            "p99": 3.498742
+          },
+          "tracking": {
+            "p50": 24.154034,
+            "p95": 26.267686,
+            "p99": 38.830025
+          },
+          "tracking_gmc": {
+            "p50": 24.079078,
+            "p95": 26.203522,
+            "p99": 38.771401
+          },
+          "tracking_association": {
+            "p50": 0.060081,
+            "p95": 0.074081,
+            "p99": 0.076707
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000291,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.110247,
+            "p95": 0.156913,
+            "p99": 0.180537
+          },
+          "output_validation": {
+            "frames": 129,
+            "targets": 1181,
+            "predicted_targets": 75
+          },
+          "jsonl_sha256": "9e2da7afd502db333c68d2616220ae43aae49a2cfb22c04bc619c57ed056a584",
+          "application_summary": {
+            "received": "300",
+            "results": "129",
+            "targets": "1181",
+            "capture_mailbox_dropped": "164",
+            "completion_dropped": "7",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "8",
+            "elapsed_s": "5.06911"
+          }
+        },
+        {
+          "name": "one_all_cores",
+          "workers": 1,
+          "core_mask": 7,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "7",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/int8_cv8/one_all_cores.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "8",
+            "--copy-input"
+          ],
+          "output_frames": 149,
+          "measured_frames": 139,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 67.600438,
+            "p95": 80.230149,
+            "p99": 90.344592
+          },
+          "source_to_result_estimate": {
+            "p50": 67.766435,
+            "p95": 80.317166,
+            "p99": 90.479019
+          },
+          "queue": {
+            "p50": 9.972114,
+            "p95": 15.555343,
+            "p99": 16.721979
+          },
+          "completion_queue": {
+            "p50": 0.011083,
+            "p95": 0.017499,
+            "p99": 12.369551
+          },
+          "preprocess": {
+            "p50": 10.933714,
+            "p95": 11.975811,
+            "p99": 14.172878
+          },
+          "inference": {
+            "p50": 18.865964,
+            "p95": 21.598518,
+            "p99": 22.53066
+          },
+          "input_submit": {
+            "p50": 0.272993,
+            "p95": 0.409781,
+            "p99": 0.479196
+          },
+          "rknn_run": {
+            "p50": 17.990112,
+            "p95": 20.658501,
+            "p99": 21.659766
+          },
+          "output_get": {
+            "p50": 0.592651,
+            "p95": 0.90531,
+            "p99": 1.009723
+          },
+          "postprocess": {
+            "p50": 3.365453,
+            "p95": 3.515658,
+            "p99": 3.622405
+          },
+          "tracking": {
+            "p50": 23.726753,
+            "p95": 26.91692,
+            "p99": 40.686142
+          },
+          "tracking_gmc": {
+            "p50": 23.666088,
+            "p95": 26.856255,
+            "p99": 40.61527
+          },
+          "tracking_association": {
+            "p50": 0.059499,
+            "p95": 0.072915,
+            "p99": 0.078748
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.111414,
+            "p95": 0.162746,
+            "p99": 0.16887
+          },
+          "output_validation": {
+            "frames": 149,
+            "targets": 1348,
+            "predicted_targets": 92
+          },
+          "jsonl_sha256": "2fd6bb9ba11d0fcde811c88353fb3780840e01cd075cbb515e5c485433aa0ae7",
+          "application_summary": {
+            "received": "300",
+            "results": "149",
+            "targets": "1348",
+            "capture_mailbox_dropped": "151",
+            "completion_dropped": "0",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "8",
+            "elapsed_s": "5.06795"
+          }
+        }
+      ]
+    },
+    {
+      "run_directory": "build/fp16_fast_cv4",
+      "received_frame_limit": 300,
+      "warmup_output_records": 10,
+      "cases": [
+        {
+          "name": "one_auto",
+          "workers": 1,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/fp16_fast_cv4/one_auto.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n.rknn",
+            "--input-mode",
+            "fp16_normalized",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 102,
+          "measured_frames": 92,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 89.744644,
+            "p95": 98.024552,
+            "p99": 99.869004
+          },
+          "source_to_result_estimate": {
+            "p50": 89.906557,
+            "p95": 98.18861,
+            "p99": 99.995188
+          },
+          "queue": {
+            "p50": 8.887434,
+            "p95": 16.080328,
+            "p99": 16.626022
+          },
+          "completion_queue": {
+            "p50": 0.013708,
+            "p95": 0.017791,
+            "p99": 0.018958
+          },
+          "preprocess": {
+            "p50": 12.009351,
+            "p95": 13.176862,
+            "p99": 13.381607
+          },
+          "inference": {
+            "p50": 32.876971,
+            "p95": 34.115938,
+            "p99": 34.959999
+          },
+          "input_submit": {
+            "p50": 0.392281,
+            "p95": 0.543069,
+            "p99": 0.57311
+          },
+          "rknn_run": {
+            "p50": 29.525225,
+            "p95": 30.7814,
+            "p99": 31.601254
+          },
+          "output_get": {
+            "p50": 2.978422,
+            "p95": 3.045211,
+            "p99": 3.063587
+          },
+          "postprocess": {
+            "p50": 3.776693,
+            "p95": 4.137475,
+            "p99": 4.419509
+          },
+          "tracking": {
+            "p50": 32.907594,
+            "p95": 34.370556,
+            "p99": 36.075303
+          },
+          "tracking_gmc": {
+            "p50": 32.825638,
+            "p95": 34.297058,
+            "p99": 36.007055
+          },
+          "tracking_association": {
+            "p50": 0.066498,
+            "p95": 0.077582,
+            "p99": 0.082831
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.145537,
+            "p95": 0.170913,
+            "p99": 0.205619
+          },
+          "output_validation": {
+            "frames": 102,
+            "targets": 958,
+            "predicted_targets": 62
+          },
+          "jsonl_sha256": "88466f21a23776d1d63f0c19a6138f7d3ffe59c72db5ff882aa0aafc918cf735",
+          "application_summary": {
+            "received": "300",
+            "results": "102",
+            "targets": "958",
+            "capture_mailbox_dropped": "198",
+            "completion_dropped": "0",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "4",
+            "elapsed_s": "5.08908"
+          }
+        },
+        {
+          "name": "one_all_cores",
+          "workers": 1,
+          "core_mask": 7,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "7",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/fp16_fast_cv4/one_all_cores.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n.rknn",
+            "--input-mode",
+            "fp16_normalized",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 105,
+          "measured_frames": 95,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 89.173577,
+            "p95": 96.886209,
+            "p99": 98.919946
+          },
+          "source_to_result_estimate": {
+            "p50": 89.345928,
+            "p95": 96.988407,
+            "p99": 99.053505
+          },
+          "queue": {
+            "p50": 9.034138,
+            "p95": 16.280698,
+            "p99": 16.802184
+          },
+          "completion_queue": {
+            "p50": 0.013124,
+            "p95": 0.015166,
+            "p99": 0.018666
+          },
+          "preprocess": {
+            "p50": 11.855938,
+            "p95": 12.882871,
+            "p99": 13.314527
+          },
+          "inference": {
+            "p50": 31.934329,
+            "p95": 33.090465,
+            "p99": 33.578702
+          },
+          "input_submit": {
+            "p50": 0.366324,
+            "p95": 0.56786,
+            "p99": 0.71544
+          },
+          "rknn_run": {
+            "p50": 28.558667,
+            "p95": 29.741636,
+            "p99": 30.156667
+          },
+          "output_get": {
+            "p50": 2.986297,
+            "p95": 3.05367,
+            "p99": 3.10471
+          },
+          "postprocess": {
+            "p50": 3.756568,
+            "p95": 4.08906,
+            "p99": 4.343677
+          },
+          "tracking": {
+            "p50": 32.925094,
+            "p95": 34.705673,
+            "p99": 35.93414
+          },
+          "tracking_gmc": {
+            "p50": 32.84693,
+            "p95": 34.658424,
+            "p99": 35.861809
+          },
+          "tracking_association": {
+            "p50": 0.065915,
+            "p95": 0.078748,
+            "p99": 0.092456
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.120746,
+            "p95": 0.167413,
+            "p99": 0.191911
+          },
+          "output_validation": {
+            "frames": 105,
+            "targets": 976,
+            "predicted_targets": 63
+          },
+          "jsonl_sha256": "275295e41eeaf9131fbd19b52e5dff0c2fa016d4f0b32d1ee294febaa86a72e2",
+          "application_summary": {
+            "received": "300",
+            "results": "105",
+            "targets": "976",
+            "capture_mailbox_dropped": "195",
+            "completion_dropped": "0",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "4",
+            "elapsed_s": "5.10489"
+          }
+        },
+        {
+          "name": "two_instances",
+          "workers": 2,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "2",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/fp16_fast_cv4/two_instances.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n.rknn",
+            "--input-mode",
+            "fp16_normalized",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 168,
+          "measured_frames": 158,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 102.545269,
+            "p95": 120.838998,
+            "p99": 125.792243
+          },
+          "source_to_result_estimate": {
+            "p50": 102.92437,
+            "p95": 121.025365,
+            "p99": 126.187472
+          },
+          "queue": {
+            "p50": 7.852044,
+            "p95": 15.135353,
+            "p99": 16.279531
+          },
+          "completion_queue": {
+            "p50": 8.301491,
+            "p95": 26.059442,
+            "p99": 27.563235
+          },
+          "preprocess": {
+            "p50": 13.502063,
+            "p95": 15.422054,
+            "p99": 16.054079
+          },
+          "inference": {
+            "p50": 38.266246,
+            "p95": 44.111968,
+            "p99": 45.335186
+          },
+          "input_submit": {
+            "p50": 0.460822,
+            "p95": 0.775813,
+            "p99": 0.865352
+          },
+          "rknn_run": {
+            "p50": 34.447554,
+            "p95": 36.603498,
+            "p99": 37.170192
+          },
+          "output_get": {
+            "p50": 3.161292,
+            "p95": 8.424863,
+            "p99": 8.940224
+          },
+          "postprocess": {
+            "p50": 4.770375,
+            "p95": 6.03705,
+            "p99": 7.790796
+          },
+          "tracking": {
+            "p50": 28.804245,
+            "p95": 32.738724,
+            "p99": 33.716074
+          },
+          "tracking_gmc": {
+            "p50": 28.735996,
+            "p95": 32.663477,
+            "p99": 33.645202
+          },
+          "tracking_association": {
+            "p50": 0.06679,
+            "p95": 0.088081,
+            "p99": 0.102955
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000583
+          },
+          "publisher_wait": {
+            "p50": 0.143205,
+            "p95": 0.204745,
+            "p99": 0.236244
+          },
+          "output_validation": {
+            "frames": 168,
+            "targets": 1595,
+            "predicted_targets": 105
+          },
+          "jsonl_sha256": "2e29dba18733d3135aadeab0592a7d7673d37f60eb19cab351bc12bdf78216e8",
+          "application_summary": {
+            "received": "300",
+            "results": "168",
+            "targets": "1595",
+            "capture_mailbox_dropped": "126",
+            "completion_dropped": "6",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "2",
+            "opencv_threads": "4",
+            "elapsed_s": "5.0938"
+          }
+        },
+        {
+          "name": "three_instances",
+          "workers": 3,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "3",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "300",
+            "--output",
+            "build/fp16_fast_cv4/three_instances.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n.rknn",
+            "--input-mode",
+            "fp16_normalized",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 151,
+          "measured_frames": 141,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 116.558027,
+            "p95": 132.939057,
+            "p99": 136.736166
+          },
+          "source_to_result_estimate": {
+            "p50": 117.088569,
+            "p95": 133.367336,
+            "p99": 137.085558
+          },
+          "queue": {
+            "p50": 7.828128,
+            "p95": 15.972706,
+            "p99": 16.803351
+          },
+          "completion_queue": {
+            "p50": 10.888214,
+            "p95": 28.378131,
+            "p99": 31.245722
+          },
+          "preprocess": {
+            "p50": 16.817933,
+            "p95": 20.081015,
+            "p99": 20.886577
+          },
+          "inference": {
+            "p50": 41.564911,
+            "p95": 44.336546,
+            "p99": 46.231163
+          },
+          "input_submit": {
+            "p50": 0.579818,
+            "p95": 0.976474,
+            "p99": 1.261134
+          },
+          "rknn_run": {
+            "p50": 37.497434,
+            "p95": 39.55713,
+            "p99": 40.51523
+          },
+          "output_get": {
+            "p50": 3.251415,
+            "p95": 4.301096,
+            "p99": 8.756771
+          },
+          "postprocess": {
+            "p50": 5.445858,
+            "p95": 7.110647,
+            "p99": 7.482512
+          },
+          "tracking": {
+            "p50": 32.734934,
+            "p95": 37.526599,
+            "p99": 38.656486
+          },
+          "tracking_gmc": {
+            "p50": 32.657061,
+            "p95": 37.438227,
+            "p99": 38.587946
+          },
+          "tracking_association": {
+            "p50": 0.071165,
+            "p95": 0.097414,
+            "p99": 0.106456
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000583
+          },
+          "publisher_wait": {
+            "p50": 0.148746,
+            "p95": 0.205328,
+            "p99": 0.233911
+          },
+          "output_validation": {
+            "frames": 151,
+            "targets": 1417,
+            "predicted_targets": 90
+          },
+          "jsonl_sha256": "c1b20dea4478d61057db1276c81d1a0c3a8b40bda457cdee3a07e45f0a14221f",
+          "application_summary": {
+            "received": "300",
+            "results": "151",
+            "targets": "1417",
+            "capture_mailbox_dropped": "71",
+            "completion_dropped": "78",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "3",
+            "opencv_threads": "4",
+            "elapsed_s": "5.1242"
+          }
+        }
+      ]
+    },
+    {
+      "run_directory": "build/fp16_baseline_final",
+      "received_frame_limit": 900,
+      "warmup_output_records": 10,
+      "cases": [
+        {
+          "name": "one_auto",
+          "workers": 1,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "900",
+            "--output",
+            "build/fp16_baseline_final/one_auto.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "1",
+            "--copy-input"
+          ],
+          "output_frames": 269,
+          "measured_frames": 259,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 108.828494,
+            "p95": 116.800413,
+            "p99": 118.464325
+          },
+          "source_to_result_estimate": {
+            "p50": 108.945198,
+            "p95": 116.945129,
+            "p99": 118.710294
+          },
+          "queue": {
+            "p50": 8.829394,
+            "p95": 16.399989,
+            "p99": 16.772729
+          },
+          "completion_queue": {
+            "p50": 0.01225,
+            "p95": 0.016333,
+            "p99": 0.018958
+          },
+          "preprocess": {
+            "p50": 8.928268,
+            "p95": 10.207776,
+            "p99": 10.517809
+          },
+          "inference": {
+            "p50": 43.07571,
+            "p95": 43.964395,
+            "p99": 44.130057
+          },
+          "input_submit": {
+            "p50": 11.028212,
+            "p95": 11.208166,
+            "p99": 11.222166
+          },
+          "rknn_run": {
+            "p50": 29.064992,
+            "p95": 29.954844,
+            "p99": 30.123423
+          },
+          "output_get": {
+            "p50": 2.981047,
+            "p95": 3.063879,
+            "p99": 3.122793
+          },
+          "postprocess": {
+            "p50": 3.757736,
+            "p95": 4.121726,
+            "p99": 4.272222
+          },
+          "tracking": {
+            "p50": 43.849189,
+            "p95": 46.488995,
+            "p99": 48.153493
+          },
+          "tracking_gmc": {
+            "p50": 43.774234,
+            "p95": 46.42279,
+            "p99": 48.088745
+          },
+          "tracking_association": {
+            "p50": 0.06679,
+            "p95": 0.092748,
+            "p99": 0.100622
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.105581,
+            "p95": 0.175287,
+            "p99": 0.209703
+          },
+          "output_validation": {
+            "frames": 269,
+            "targets": 2511,
+            "predicted_targets": 115
+          },
+          "jsonl_sha256": "d959311afc39250a0dc99ca0f85f1964f0f9472630e7587238da7d842914004e",
+          "application_summary": {
+            "received": "900",
+            "results": "269",
+            "targets": "2511",
+            "capture_mailbox_dropped": "631",
+            "completion_dropped": "0",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "1",
+            "elapsed_s": "15.1452"
+          }
+        }
+      ]
+    },
+    {
+      "run_directory": "build/fp16_fast_final",
+      "received_frame_limit": 900,
+      "warmup_output_records": 10,
+      "cases": [
+        {
+          "name": "one_auto",
+          "workers": 1,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "900",
+            "--output",
+            "build/fp16_fast_final/one_auto.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n.rknn",
+            "--input-mode",
+            "fp16_normalized",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 306,
+          "measured_frames": 296,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 90.366189,
+            "p95": 98.665056,
+            "p99": 99.985689
+          },
+          "source_to_result_estimate": {
+            "p50": 90.577528,
+            "p95": 98.822849,
+            "p99": 100.107225
+          },
+          "queue": {
+            "p50": 8.986891,
+            "p95": 16.230244,
+            "p99": 16.775646
+          },
+          "completion_queue": {
+            "p50": 0.013708,
+            "p95": 0.018374,
+            "p99": 0.021583
+          },
+          "preprocess": {
+            "p50": 11.818025,
+            "p95": 12.928371,
+            "p99": 13.081784
+          },
+          "inference": {
+            "p50": 32.98664,
+            "p95": 34.156193,
+            "p99": 37.201406
+          },
+          "input_submit": {
+            "p50": 0.376824,
+            "p95": 0.659149,
+            "p99": 0.811688
+          },
+          "rknn_run": {
+            "p50": 29.54798,
+            "p95": 30.630035,
+            "p99": 31.114189
+          },
+          "output_get": {
+            "p50": 2.990672,
+            "p95": 3.056004,
+            "p99": 7.052024
+          },
+          "postprocess": {
+            "p50": 3.74782,
+            "p95": 4.184141,
+            "p99": 4.528007
+          },
+          "tracking": {
+            "p50": 33.128679,
+            "p95": 34.732512,
+            "p99": 35.8099
+          },
+          "tracking_gmc": {
+            "p50": 33.078805,
+            "p95": 34.671555,
+            "p99": 35.743111
+          },
+          "tracking_association": {
+            "p50": 0.06329,
+            "p95": 0.09129,
+            "p99": 0.103539
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.121913,
+            "p95": 0.171788,
+            "p99": 0.200953
+          },
+          "output_validation": {
+            "frames": 306,
+            "targets": 2873,
+            "predicted_targets": 152
+          },
+          "jsonl_sha256": "a014840c144b560f05ad3c5e3732f5d6927539f3b4744137e1932378204a73f5",
+          "application_summary": {
+            "received": "900",
+            "results": "306",
+            "targets": "2873",
+            "capture_mailbox_dropped": "594",
+            "completion_dropped": "0",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "4",
+            "elapsed_s": "15.0974"
+          }
+        },
+        {
+          "name": "one_all_cores",
+          "workers": 1,
+          "core_mask": 7,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "7",
+            "--realtime",
+            "--max-frames",
+            "900",
+            "--output",
+            "build/fp16_fast_final/one_all_cores.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n.rknn",
+            "--input-mode",
+            "fp16_normalized",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 313,
+          "measured_frames": 303,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 88.988978,
+            "p95": 96.69461,
+            "p99": 97.998616
+          },
+          "source_to_result_estimate": {
+            "p50": 89.154904,
+            "p95": 96.826767,
+            "p99": 98.099952
+          },
+          "queue": {
+            "p50": 8.855353,
+            "p95": 15.989626,
+            "p99": 16.530945
+          },
+          "completion_queue": {
+            "p50": 0.013124,
+            "p95": 0.01575,
+            "p99": 0.018666
+          },
+          "preprocess": {
+            "p50": 11.832608,
+            "p95": 12.882873,
+            "p99": 12.98612
+          },
+          "inference": {
+            "p50": 32.068208,
+            "p95": 33.132763,
+            "p99": 33.700331
+          },
+          "input_submit": {
+            "p50": 0.368365,
+            "p95": 0.565235,
+            "p99": 0.938267
+          },
+          "rknn_run": {
+            "p50": 28.61613,
+            "p95": 29.664352,
+            "p99": 30.253796
+          },
+          "output_get": {
+            "p50": 2.992422,
+            "p95": 3.074378,
+            "p99": 3.135043
+          },
+          "postprocess": {
+            "p50": 3.766778,
+            "p95": 4.094602,
+            "p99": 4.35622
+          },
+          "tracking": {
+            "p50": 32.89477,
+            "p95": 34.598058,
+            "p99": 35.378246
+          },
+          "tracking_gmc": {
+            "p50": 32.833521,
+            "p95": 34.527768,
+            "p99": 35.296582
+          },
+          "tracking_association": {
+            "p50": 0.065039,
+            "p95": 0.092164,
+            "p99": 0.101497
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.122789,
+            "p95": 0.166829,
+            "p99": 0.182287
+          },
+          "output_validation": {
+            "frames": 313,
+            "targets": 2952,
+            "predicted_targets": 153
+          },
+          "jsonl_sha256": "dafbd6a74d1d30f9924e8a23a658766c5034b4a675e6a568ff43885783631d52",
+          "application_summary": {
+            "received": "900",
+            "results": "313",
+            "targets": "2952",
+            "capture_mailbox_dropped": "587",
+            "completion_dropped": "0",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "4",
+            "elapsed_s": "15.0913"
+          }
+        }
+      ]
+    },
+    {
+      "run_directory": "build/int8_final",
+      "received_frame_limit": 900,
+      "warmup_output_records": 10,
+      "cases": [
+        {
+          "name": "one_auto",
+          "workers": 1,
+          "core_mask": 0,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "0",
+            "--realtime",
+            "--max-frames",
+            "900",
+            "--output",
+            "build/int8_final/one_auto.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 487,
+          "measured_frames": 477,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 66.05845,
+            "p95": 73.669003,
+            "p99": 77.780229
+          },
+          "source_to_result_estimate": {
+            "p50": 66.233134,
+            "p95": 74.069313,
+            "p99": 78.07922
+          },
+          "queue": {
+            "p50": 9.356131,
+            "p95": 15.770299,
+            "p99": 16.374907
+          },
+          "completion_queue": {
+            "p50": 0.011083,
+            "p95": 0.014583,
+            "p99": 2.42602
+          },
+          "preprocess": {
+            "p50": 10.709722,
+            "p95": 11.852441,
+            "p99": 12.171225
+          },
+          "inference": {
+            "p50": 16.421573,
+            "p95": 17.78158,
+            "p99": 18.08578
+          },
+          "input_submit": {
+            "p50": 0.28466,
+            "p95": 0.373324,
+            "p99": 0.516237
+          },
+          "rknn_run": {
+            "p50": 15.51918,
+            "p95": 16.933143,
+            "p99": 17.153346
+          },
+          "output_get": {
+            "p50": 0.591193,
+            "p95": 0.779021,
+            "p99": 1.092263
+          },
+          "postprocess": {
+            "p50": 3.334246,
+            "p95": 3.420287,
+            "p99": 3.514492
+          },
+          "tracking": {
+            "p50": 26.011616,
+            "p95": 29.226282,
+            "p99": 32.225413
+          },
+          "tracking_gmc": {
+            "p50": 25.955325,
+            "p95": 29.181658,
+            "p99": 32.190706
+          },
+          "tracking_association": {
+            "p50": 0.056874,
+            "p95": 0.077289,
+            "p99": 0.08779
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.128622,
+            "p95": 0.169746,
+            "p99": 0.184912
+          },
+          "output_validation": {
+            "frames": 487,
+            "targets": 4390,
+            "predicted_targets": 242
+          },
+          "jsonl_sha256": "c77484994a7f1d390bcf4458a85499947b7251d05190eb510ed83a55ec0cd23c",
+          "application_summary": {
+            "received": "900",
+            "results": "487",
+            "targets": "4390",
+            "capture_mailbox_dropped": "413",
+            "completion_dropped": "0",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "4",
+            "elapsed_s": "15.0722"
+          }
+        },
+        {
+          "name": "one_all_cores",
+          "workers": 1,
+          "core_mask": 7,
+          "command": [
+            "build/Aerial_detection_demo",
+            "--config",
+            "config/video.yaml",
+            "--workers",
+            "1",
+            "--core-mask",
+            "7",
+            "--realtime",
+            "--max-frames",
+            "900",
+            "--output",
+            "build/int8_final/one_all_cores.jsonl",
+            "--no-los",
+            "--model",
+            "model/RK3588/yolov8n_int8.rknn",
+            "--input-mode",
+            "uint8",
+            "--decoder",
+            "mpp",
+            "--cv-threads",
+            "4",
+            "--copy-input"
+          ],
+          "output_frames": 497,
+          "measured_frames": 487,
+          "calibrated": false,
+          "sensor_capture_latency_measured": false,
+          "receiver_to_result": {
+            "p50": 65.166558,
+            "p95": 71.44452,
+            "p99": 73.048063
+          },
+          "source_to_result_estimate": {
+            "p50": 65.345497,
+            "p95": 71.785145,
+            "p99": 73.330209
+          },
+          "queue": {
+            "p50": 8.855062,
+            "p95": 15.686885,
+            "p99": 16.280994
+          },
+          "completion_queue": {
+            "p50": 0.0105,
+            "p95": 0.013708,
+            "p99": 0.017499
+          },
+          "preprocess": {
+            "p50": 10.728971,
+            "p95": 11.713029,
+            "p99": 11.951315
+          },
+          "inference": {
+            "p50": 15.869463,
+            "p95": 17.247553,
+            "p99": 17.898535
+          },
+          "input_submit": {
+            "p50": 0.290201,
+            "p95": 0.362823,
+            "p99": 0.522945
+          },
+          "rknn_run": {
+            "p50": 14.963861,
+            "p95": 16.289161,
+            "p99": 16.954726
+          },
+          "output_get": {
+            "p50": 0.593818,
+            "p95": 0.756564,
+            "p99": 1.050848
+          },
+          "postprocess": {
+            "p50": 3.352038,
+            "p95": 3.455285,
+            "p99": 3.53345
+          },
+          "tracking": {
+            "p50": 25.983034,
+            "p95": 27.30425,
+            "p99": 28.898458
+          },
+          "tracking_gmc": {
+            "p50": 25.929369,
+            "p95": 27.23746,
+            "p99": 28.858792
+          },
+          "tracking_association": {
+            "p50": 0.055707,
+            "p95": 0.076707,
+            "p99": 0.086331
+          },
+          "los": {
+            "p50": 0,
+            "p95": 0.000292,
+            "p99": 0.000292
+          },
+          "publisher_wait": {
+            "p50": 0.111122,
+            "p95": 0.169745,
+            "p99": 0.198328
+          },
+          "output_validation": {
+            "frames": 497,
+            "targets": 4498,
+            "predicted_targets": 264
+          },
+          "jsonl_sha256": "fe076b477a6fffe9b3d4ded2a357050d8b3551f744c1b9e39b9e7f99337d6570",
+          "application_summary": {
+            "received": "900",
+            "results": "497",
+            "targets": "4498",
+            "capture_mailbox_dropped": "403",
+            "completion_dropped": "0",
+            "expired": "0",
+            "json_dropped": "0",
+            "workers": "1",
+            "opencv_threads": "4",
+            "elapsed_s": "15.0643"
+          }
+        }
+      ]
+    }
+  ],
+  "offline_120_frame_smoke": {
+    "fp16_default": {
+      "frames": 120,
+      "targets": 955,
+      "predicted_targets": 69
+    },
+    "int8_default": {
+      "frames": 120,
+      "targets": 949,
+      "predicted_targets": 74
+    },
+    "fp16_reference": {
+      "frames": 120,
+      "targets": 955,
+      "predicted_targets": 69
+    },
+    "fp16_comparison": {
+      "changed_target_records_frames": 0,
+      "changed_frame_ids": [],
+      "all_track_ids_equal": true,
+      "all_observation_flags_equal": true,
+      "max_bbox_coordinate_delta_pixels": 0.0
+    }
+  }
+}
